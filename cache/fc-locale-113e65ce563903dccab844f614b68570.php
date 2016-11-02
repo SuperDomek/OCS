@@ -1,0 +1,15 @@
+<?php return array (
+  'plugins.importexport.METSExport.displayName' => 'Doplněk pro export dat ve formátu METS XML',
+  'plugins.importexport.METSExport.description' => 'Doplněk exportuje data o konferenci ve XML formátu METS',
+  'plugins.importexport.METSExport.settings' => 'Nastavení',
+  'plugins.importexport.METSExport.export' => 'Export dat',
+  'plugins.importexport.METSExport.export.schedConfs' => 'Exportovat plánované/aktuální konference',
+  'plugins.importexport.METSExport.export.selectschedConfs' => 'Prosím, zvolte plánované/aktuální konference, které chcete exportovat',
+  'plugins.importexport.METSExport.export.error.SchedConfNotFound' => 'Žádné plánované konferenci neodpovídá určené ID příspěvku "{$SchedConfId}".',
+  'plugins.importexport.METSExport.export.error.unknownConference' => 'Neznámá/nedostupná cesta ke konferenci: {$conferencePath}',
+  'plugins.importexport.METSExport.settings.FContent' => 'Použít kódování base64 při exportu obsahu',
+  'plugins.importexport.METSExport.settings.FLocat' => 'Použít URL odkazy na binární obsah',
+  'plugins.importexport.METSExport.settings.organization' => 'METS:agent element atribut organizace',
+  'plugins.importexport.METSExport.settings.preservationLevel' => 'Úroveň uchování dle PREMIS',
+  'plugins.importexport.METSExport.settings.exportSuppFiles' => 'Exportovat doplňkové soubory',
+); ?>

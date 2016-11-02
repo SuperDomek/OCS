@@ -1,0 +1,239 @@
+[24-Oct-2016 12:12:34 UTC] ocs2 has produced an error
+  Message: WARNING: Invalid argument supplied for foreach()
+  In file: /home/emttpefczu/public_html/classes/install/Install.inc.php
+  At line: 117
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+[24-Oct-2016 12:12:34 UTC] ocs2 has produced an error
+  Message: WARNING: Invalid argument supplied for foreach()
+  In file: /home/emttpefczu/public_html/classes/install/Install.inc.php
+  At line: 117
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'a' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'em' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'strong' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'cite' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'code' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'ul' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'ol' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'li' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'dl' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'dt' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'dd' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'b' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'i' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'u' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'sup' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'sub' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'br' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:13:01 UTC] ocs2 has produced an error
+  Message: USER WARNING: Attribute '' in element 'p' not supported (for information on implementing this, see the support forums) 
+  In file: /home/emttpefczu/public_html/lib/pkp/lib/htmlpurifier/library/HTMLPurifier/HTMLDefinition.php
+  At line: 324
+  Stacktrace: 
+  Server info:
+   OS: Linux
+   PHP Version: 5.6.27
+   Apache Version: N/A
+   DB Driver: mysql
+   DB server version: 10.0.27-MariaDB-cll-lve
+[24-Oct-2016 12:18:46 UTC] NOTICE: Undefined variable: conference (/home/emttpefczu/public_html/classes/admin/form/ConferenceSiteSettingsForm.inc.php:79)
+[24-Oct-2016 12:20:45 UTC] NOTICE: Undefined variable: timingCorrect (/home/emttpefczu/public_html/classes/manager/form/TimelineForm.inc.php:222)
+[24-Oct-2016 13:47:04 UTC] PHP Fatal error:  Call to undefined function ldap_connect() in /home/emttpefczu/public_html/plugins/auth/ldap/LDAPAuthPlugin.inc.php on line 239
+[24-Oct-2016 13:47:12 UTC] PHP Fatal error:  Call to undefined function ldap_connect() in /home/emttpefczu/public_html/plugins/auth/ldap/LDAPAuthPlugin.inc.php on line 239
+[24-Oct-2016 13:47:44 UTC] NOTICE: Undefined variable: timingCorrect (/home/emttpefczu/public_html/classes/manager/form/TimelineForm.inc.php:222)
+[24-Oct-2016 13:52:47 UTC] NOTICE: Undefined variable: reviewForm (/home/emttpefczu/public_html/pages/manager/ReviewFormHandler.inc.php:94)
+[25-Oct-2016 05:19:37 UTC] PHP Fatal error:  Call to undefined function ldap_connect() in /home/emttpefczu/public_html/plugins/auth/ldap/LDAPAuthPlugin.inc.php on line 239
+[25-Oct-2016 05:20:45 UTC] PHP Fatal error:  Call to undefined function ldap_connect() in /home/emttpefczu/public_html/plugins/auth/ldap/LDAPAuthPlugin.inc.php on line 239
+[25-Oct-2016 07:02:28 UTC] PHP Fatal error:  Call to undefined function ldap_connect() in /home/emttpefczu/public_html/plugins/auth/ldap/LDAPAuthPlugin.inc.php on line 239
+[25-Oct-2016 07:03:07 UTC] PHP Fatal error:  Call to undefined function ldap_connect() in /home/emttpefczu/public_html/plugins/auth/ldap/LDAPAuthPlugin.inc.php on line 239
+[25-Oct-2016 09:51:22 UTC] NOTICE: Undefined variable: timingCorrect (/home/emttpefczu/public_html/classes/manager/form/TimelineForm.inc.php:222)
+[25-Oct-2016 14:09:52 UTC] NOTICE: Undefined variable: timingCorrect (/home/emttpefczu/public_html/classes/manager/form/TimelineForm.inc.php:222)
+[25-Oct-2016 14:10:49 UTC] NOTICE: Undefined variable: timingCorrect (/home/emttpefczu/public_html/classes/manager/form/TimelineForm.inc.php:222)
+[26-Oct-2016 13:19:30 UTC] NOTICE: Undefined variable: timingCorrect (/home/emttpefczu/public_html/classes/manager/form/TimelineForm.inc.php:222)
+[26-Oct-2016 14:47:47 UTC] PHP Fatal error:  Call to undefined function ldap_connect() in /home/emttpefczu/public_html/plugins/auth/ldap/LDAPAuthPlugin.inc.php on line 239
+[26-Oct-2016 14:49:38 UTC] PHP Fatal error:  Call to undefined function ldap_connect() in /home/emttpefczu/public_html/plugins/auth/ldap/LDAPAuthPlugin.inc.php on line 239
+[26-Oct-2016 16:14:27 UTC] NOTICE: Undefined variable: timingCorrect (/home/emttpefczu/public_html/classes/manager/form/TimelineForm.inc.php:222)
+[26-Oct-2016 16:14:36 UTC] NOTICE: Undefined variable: timingCorrect (/home/emttpefczu/public_html/classes/manager/form/TimelineForm.inc.php:222)
+[26-Oct-2016 16:15:25 UTC] NOTICE: Undefined variable: timingCorrect (/home/emttpefczu/public_html/classes/manager/form/TimelineForm.inc.php:222)
+[26-Oct-2016 16:15:31 UTC] NOTICE: Undefined variable: timingCorrect (/home/emttpefczu/public_html/classes/manager/form/TimelineForm.inc.php:222)
+[27-Oct-2016 07:11:45 UTC] PHP Fatal error:  Call to undefined function ldap_connect() in /home/emttpefczu/public_html/plugins/auth/ldap/LDAPAuthPlugin.inc.php on line 239

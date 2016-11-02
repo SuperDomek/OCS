@@ -1,0 +1,17 @@
+<?php return array (
+  'plugins.paymethod.paypal.displayName' => 'Doplněk pro platby systémem Paypal',
+  'plugins.paymethod.paypal.settings.paypalenable' => 'Povolit PayPal platby',
+  'plugins.paymethod.paypal.settings.paypalurl' => 'IPN URL',
+  'plugins.paymethod.paypal.settings.paypalurl.description' => 'Zde je uvedena URL adresa pro PayPal službu: Instant Payment Notification (IPN). Pro testovací účely prosím použijte: <u>https://www.sandbox.paypal.com/cgi-bin/webscr</u>. Na produkčním systému zadejte: <u>https://www.paypal.com/cgi-bin/webscr</u>.',
+  'plugins.paymethod.paypal.settings.selleraccount' => 'Účet prodejce',
+  'plugins.paymethod.paypal.settings.selleraccount.description' => 'Zde je uvedeno uživatelské jméno PayPal účtu prodejce, na který má být provedena platba (zpravidla se jedná o emailovou adresu).',
+  'plugins.paymethod.paypal.settings.curlNotInstalled' => 'Upozornění: V PHP není instalována podpora knihovny CURL. Platby pomocí systému PayPal vyžadují podporu knihovny CURL. Doplněk nebude správně fungovat, dokud nebude podpora CURL do PHP nainstalována.',
+  'plugins.paymethod.paypal.settings' => 'Nastavení pro systém PayPal',
+  'plugins.paymethod.paypal' => 'PayPal platba',
+  'plugins.paymethod.paypal.description' => 'Doplněk pro platby systémem PayPal umožňuje uživatelům OCS provádět platby pomocí většiny platebních karet, případně pomocí služby eChecks. Přičemž není nutné, aby uživatelé byli členy systému PayPal. K tomu aby bylo možné využívat tento typ plateb, musí manažer konference provést správně nastavení <a href="http://www.paypal.com" target="_new">PayPal Business účtu</a>.',
+  'plugins.paymethod.paypal.warning' => 'Po kliknutí na tlačítko "Continue" budete přesměrováni na stránky služby PayPal, kde prosím proveďte platbu. Po dokončení Vaší platby můžete využít tlačítko "Return to Merchant" k návratu na tyto stránky.',
+  'plugins.paymethod.paypal.purchase.amount' => 'Částka',
+  'plugins.paymethod.paypal.purchase.description' => 'Popis',
+  'plugins.paymethod.paypal.purchase.cancelled' => 'Váš nákup byl zrušen.',
+  'plugins.paymethod.paypal.purchase.cancelled.title' => 'Nákup zrušen',
+); ?>

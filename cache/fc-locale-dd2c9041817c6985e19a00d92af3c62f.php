@@ -1,0 +1,16 @@
+<?php return array (
+  'plugins.generic.announcementfeed.displayName' => 'Doplněk pro správu RSS kanálu konferenčních oznámení',
+  'plugins.generic.announcementfeed.description' => 'Doplněk vytváří a spravuje RSS/Atom kanály oznámení publikované pro danou konferenci.',
+  'plugins.generic.announcementfeed.settings' => 'Nastavení',
+  'plugins.generic.announcementfeed.settings.all' => 'Zobrazit odkaz na RSS kanál na všech stránkách konference.',
+  'plugins.generic.announcementfeed.settings.homepage' => 'Zobrazit odkaz na RSS kanál pouze na hlavní stránce konference a na stránce konferenčních oznámení.',
+  'plugins.generic.announcementfeed.settings.announcement' => 'Zobrazit odkaz na RSS kanál pouze na stránce konferenčních oznámení.',
+  'plugins.generic.announcementfeed.settings.recentAnnouncements1' => 'Omezit kanál na',
+  'plugins.generic.announcementfeed.settings.recentAnnouncements2' => 'posledních oznámení.',
+  'plugins.generic.announcementfeed.settings.recentItemsRequired' => 'Zadejte prosím kladnou hodnotu, která bude definovat počet posledních oznámení, které budou v RSS kanálu publikovány.',
+  'plugins.generic.announcementfeed.atom.altText' => 'Atom logo',
+  'plugins.generic.announcementfeed.rss1.altText' => 'RSS1 logo',
+  'plugins.generic.announcementfeed.rss2.altText' => 'RSS2 logo',
+  'plugins.generic.announcementfeed.enabled' => 'Doplněk pro správu RSS kanálu konferenčních oznámení byl povolen.',
+  'plugins.generic.announcementfeed.disabled' => 'Doplněk pro správu RSS kanálu konferenčních oznámení byl byl zakázán.',
+); ?>

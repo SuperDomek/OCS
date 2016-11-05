@@ -167,7 +167,7 @@
 
 		<table width="100%" class="data">
 		<tr valign="top">
-		<td class="label">{translate key="submission.reviewForm"}</td>
+		<td class="label">{translate key="submission.reviewForm"}ddddddddd</td>
 		<td>
 		{if $reviewAssignment->getReviewFormId()}
 			{assign var="reviewFormId" value=$reviewAssignment->getReviewFormId()}

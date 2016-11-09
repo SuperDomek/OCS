@@ -25,6 +25,8 @@ class SubmissionEditHandler extends TrackDirectorHandler {
 	/** submission associated with the request **/
 	var $submission;
 	
+	// DELETE testovaci promenna 
+	var $testovaci;
 	/**
 	 * Constructor
 	 **/
@@ -205,14 +207,13 @@ class SubmissionEditHandler extends TrackDirectorHandler {
 		$reviewFormDao =& DAORegistry::getDAO('ReviewFormDAO');
 		$reviewFormTitles = array();
 		
-		// DELETE testovaci promenna 
-		var testovaci;
+		
 		
 		if ($submission->getReviewAssignments($stage)) {
 			foreach ($submission->getReviewAssignments($stage) as $reviewAssignment) {
 				// review_form_by_sessionType
 				// sem prijde kod if(sessionType == x) then reviewForm = x;
-				testovaci = $reviewAssignment->getSessionType();
+				$testovaci = $submission->getData('sessionType');
 				$reviewForm =& $reviewFormDao->getReviewForm($reviewAssignment->getReviewFormId());
 				if ($reviewForm) {
 					$reviewFormTitles[$reviewForm->getId()] = $reviewForm->getLocalizedTitle();

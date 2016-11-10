@@ -173,11 +173,14 @@
 		{if $reviewAssignment->getReviewFormId()}
 			{assign var="reviewFormId" value=$reviewAssignment->getReviewFormId()}
 			{$reviewFormTitles[$reviewFormId]}
+			{$reviewFormTitles[1]}
 		{else}
 			{translate key="manager.reviewForms.noneChosen"}
 			<span>Zde je testovaci promenna</span>
 			{$submission->getData('sessionType')|escape}
-				{$sessionTypes[0]}
+				{$reviewFormTitles[0]}
+					{$reviewAssignment->getId()|escape}
+						{$testovaci}
 		{/if}
 		{if !$reviewAssignment->getDateCompleted()}
 			&nbsp;&nbsp;&nbsp;&nbsp;<a class="action" href="{url op="selectReviewForm" path=$submission->getPaperId()|to_array:$reviewAssignment->getId()}"{if $reviewFormResponses[$reviewId]} onclick="return confirm('{translate|escape:"jsparam" key="editor.paper.confirmChangeReviewForm"}')"{/if}>{translate key="editor.paper.selectReviewForm"}</a>{if $reviewAssignment->getReviewFormId()}&nbsp;&nbsp;&nbsp;&nbsp;<a class="action" href="{url op="clearReviewForm" path=$submission->getPaperId()|to_array:$reviewAssignment->getId()}"{if $reviewFormResponses[$reviewId]} onclick="return confirm('{translate|escape:"jsparam" key="editor.paper.confirmChangeReviewForm"}')"{/if}>{translate key="editor.paper.clearReviewForm"}</a>{/if}

@@ -207,13 +207,16 @@ class SubmissionEditHandler extends TrackDirectorHandler {
 		$reviewFormDao =& DAORegistry::getDAO('ReviewFormDAO');
 		$reviewFormTitles = array();
 		
-		
+		$testovaci = $reviewFormDao->getTitlesByAssocId(ASSOC_TYPE_CONFERENCE, $conference->getId(), 1);
 		
 		if ($submission->getReviewAssignments($stage)) {
 			foreach ($submission->getReviewAssignments($stage) as $reviewAssignment) {
 				// review_form_by_sessionType
 				// sem prijde kod if(sessionType == x) then reviewForm = x;
-				$testovaci = $submission->getData('sessionType');
+				// TrackDirectorAction::addReviewForm($submission, $reviewId, $reviewFormId);
+				// $testovaci = $submission->getData('sessionType');
+				// >>>> Potrebuju nejak ziskat seznam dostupných reviewForms <<<<<
+				$reviewID = $reviewAssignment->getId(); // <----
 				$reviewForm =& $reviewFormDao->getReviewForm($reviewAssignment->getReviewFormId());
 				if ($reviewForm) {
 					$reviewFormTitles[$reviewForm->getId()] = $reviewForm->getLocalizedTitle();

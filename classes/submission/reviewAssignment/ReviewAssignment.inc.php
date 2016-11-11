@@ -589,7 +589,7 @@ class ReviewAssignment extends DataObject {
 			//SUBMISSION_REVIEWER_RECOMMENDATION_PENDING_REVISIONS => 'reviewer.paper.decision.pendingRevisions',
 			//SUBMISSION_REVIEWER_RECOMMENDATION_RESUBMIT_ELSEWHERE => 'reviewer.paper.decision.resubmitElsewhere',
 			SUBMISSION_REVIEWER_RECOMMENDATION_AWARD => 'reviewer.paper.decision.award',
-			SUBMISSION_REVIEWER_RECOMMENDATION_PUNISH => 'reviewer.paper.decision.punnish',
+			SUBMISSION_REVIEWER_RECOMMENDATION_PUNISH => 'reviewer.paper.decision.punish',
 			SUBMISSION_REVIEWER_RECOMMENDATION_DECLINE => 'reviewer.paper.decision.decline',
 			//SUBMISSION_REVIEWER_RECOMMENDATION_SEE_COMMENTS => 'reviewer.paper.decision.seeComments'
 		);

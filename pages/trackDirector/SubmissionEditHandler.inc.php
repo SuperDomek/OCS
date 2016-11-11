@@ -25,6 +25,8 @@ class SubmissionEditHandler extends TrackDirectorHandler {
 	/** submission associated with the request **/
 	var $submission;
 	
+	// DELETE testovaci promenna 
+	var $testovaci;
 	/**
 	 * Constructor
 	 **/
@@ -204,12 +206,35 @@ class SubmissionEditHandler extends TrackDirectorHandler {
 
 		$reviewFormDao =& DAORegistry::getDAO('ReviewFormDAO');
 		$reviewFormTitles = array();
-
+				
 		if ($submission->getReviewAssignments($stage)) {
 			foreach ($submission->getReviewAssignments($stage) as $reviewAssignment) {
+				/* EDIT review_form_by_sessionType
+				* Hardcoded solution for automatic selection of reviewForm 
+				* based on submission type (table: controlled_vocab_entry_settings)
+				* and review forms (table:review_form_settings)
+				* the numbers taked directly from database.
+				*/
+
 				$reviewForm =& $reviewFormDao->getReviewForm($reviewAssignment->getReviewFormId());
+				$sessionType = $submission->getData('sessionType'); // to get type of submission
 				if ($reviewForm) {
 					$reviewFormTitles[$reviewForm->getId()] = $reviewForm->getLocalizedTitle();
+				}
+				// Added else branch
+				else{
+					if($sessionType == 1) { // SessionType Research Artice
+						TrackDirectorAction::addReviewForm($submission, $reviewAssignment->getId(), 3);
+						// viz tabulka review_form_settings
+						header("Refresh:0"); // reload page
+						exit();	// stop executing code so page reloads instanteously
+					}
+					elseif($sessionType == 2){ // SessionType Research Artice
+						TrackDirectorAction::addReviewForm($submission, $reviewAssignment->getId(), 2);
+						header("Refresh:0");
+						exit();
+					}
+					
 				}
 				unset($reviewForm);
 				$reviewFormResponses[$reviewAssignment->getId()] = $reviewFormResponseDao->reviewFormResponseExists($reviewAssignment->getId());
@@ -221,6 +246,7 @@ class SubmissionEditHandler extends TrackDirectorHandler {
 		$templateMgr->assign_by_ref('submission', $submission);
 		$templateMgr->assign_by_ref('reviewIndexes', $reviewAssignmentDao->getReviewIndexesForStage($paperId, $stage));
 		$templateMgr->assign('stage', $stage);
+		$templateMgr->assign('sessionType', $sessionType); // testuji
 		$templateMgr->assign_by_ref('reviewAssignments', $submission->getReviewAssignments($stage));
 		$templateMgr->assign('reviewFormResponses', $reviewFormResponses);
 		$templateMgr->assign('reviewFormTitles', $reviewFormTitles);

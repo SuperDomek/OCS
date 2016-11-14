@@ -225,7 +225,7 @@ class SubmissionEditHandler extends TrackDirectorHandler {
 				else{
 					if($sessionType == 1) { // SessionType Research Artice
 						TrackDirectorAction::addReviewForm($submission, $reviewAssignment->getId(), 3);
-						// viz tabulka review_form_settings
+						// see table review_form_settings
 						header("Refresh:0"); // reload page
 						exit();	// stop executing code so page reloads instanteously
 					}

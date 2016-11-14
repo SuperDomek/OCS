@@ -11,7 +11,7 @@
 {translate key="common.ccLicense"}
 {/if}
 {if $pageFooter}
-<br /><br />
+<br />
 {$pageFooter}
 {/if}
 {call_hook name="Templates::Common::Footer::PageFooter"}

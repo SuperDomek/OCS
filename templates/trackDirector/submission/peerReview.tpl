@@ -67,6 +67,7 @@
 				<td width="80%" class="nodata">{translate key="common.none"}</td>
 			{/if}
 		</tr>
+		<!-- EDIT Hide revised file Supp.files. Conference doesn't support uploading of supp. files.
 		{if not $isStageDisabled}
 		<tr valign="top">
 			<td colspan="2">
@@ -79,6 +80,7 @@
 			</td>
 		</tr>
 		{/if}
+		
 		{foreach from=$suppFiles item=suppFile}
 			<tr valign="top">
 				{if !$notFirstSuppFile}
@@ -103,6 +105,7 @@
 				<td class="nodata">{translate key="common.none"}</td>
 			</tr>
 		{/foreach}
+		-->
 	{/if}
 </table>
 
@@ -249,6 +252,9 @@
 					{/if}
 				</td>
 			</tr>
+			<!--
+			-- EDIT Hide simple textual review. The conference uses reviewForms only.
+			
 			<tr valign="top">
 				<td class="label">{translate key="submission.review"}</td>
 				<td>
@@ -260,6 +266,7 @@
 					{/if}
 				</td>
 			</tr>
+			-->
 			{if $reviewFormResponses[$reviewId]}
 			<tr valign="top">
 				<td class="label">{translate key="submission.reviewFormResponse"}</td>
@@ -268,6 +275,9 @@
 				</td>
 			</tr>
 			{/if}
+			<!--
+			-- EDIT Hide uploaded file. The conference won't use uploading of files.
+			
 			<tr valign="top">
 				<td class="label">{translate key="reviewer.paper.uploadedFile"}</td>
 				<td>
@@ -294,6 +304,7 @@
 					</table>
 				</td>
 			</tr>
+			-->
 		{/if}
 
 		{if (($reviewAssignment->getRecommendation() === null || $reviewAssignment->getRecommendation() === '') || !$reviewAssignment->getDateConfirmed()) && $reviewAssignment->getDateNotified() && !$reviewAssignment->getDeclined()}

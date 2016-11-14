@@ -74,7 +74,7 @@
 		{if $reviewFile}
 			<tr valign="top">
 				<td width="20%" class="label">{translate key="submission.reviewVersion"}</td>
-				<td width="50%" colspan="2" class="value">
+				<td colspan="2" class="value">
 					{if $lastDecision == SUBMISSION_DIRECTOR_DECISION_ACCEPT}
 						<input type="radio" name="directorDecisionFile" value="{$reviewFile->getFileId()},{$reviewFile->getRevision()}" />
 						{assign var="sendableVersionExists" value=true}
@@ -84,6 +84,7 @@
 				</td>
 			</tr>
 		{/if}
+		<!-- EDIT Hide authorFiles and DirectorFiles. Conference doesn't allow to resubmit articles.
 		{foreach from=$authorFiles item=authorFile key=key}
 			<tr valign="top">
 				{if !$authorRevisionExists}
@@ -105,6 +106,7 @@
 				<td width="80%" colspan="2" class="nodata">{translate key="common.none"}</td>
 			</tr>
 		{/foreach}
+		
 		{foreach from=$directorFiles item=directorFile key=key}
 			<tr valign="top">
 				{if !$directorRevisionExists}
@@ -127,8 +129,10 @@
 				<td width="80%" colspan="3" class="nodata">{translate key="common.none"}</td>
 			</tr>
 		{/foreach}
+		-->
 	</table>
 
+	<!-- EDIT Hide Upload Director Version and move to Layout. The conference doesn't allow reuploading.
 	{if $isCurrent}
 	<div>
 		{translate key="director.paper.uploadDirectorVersion"}
@@ -153,8 +157,8 @@
 				</td>
 			</tr>
 		</table>
-
 	{/if}
+	-->
 {/if}
 </form>
 
@@ -164,8 +168,9 @@
 
 	{include file="trackDirector/submission/complete.tpl"}
 
+	<!-- EDIT hide Layout. The conference doesn't need layout editing.
 	<div class="separator"></div>
 
 	{include file="trackDirector/submission/layout.tpl"}
+	-->
 {/if}
-

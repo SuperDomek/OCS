@@ -169,11 +169,25 @@ class TrackSubmissionHandler extends AuthorHandler {
 		$reviewEarliestNotificationByStage = $reviewAssignmentDao->getEarliestNotificationByStage($paperId);
 		$reviewFilesByStage =& $reviewAssignmentDao->getReviewFilesByStage($paperId);
 		$authorViewableFilesByStage =& $reviewAssignmentDao->getAuthorViewableFilesByStage($paperId);
-
+		
+		/* EDIT Show reviewers decisions and review forms. */
+		$reviewFormResponseDao =& DAORegistry::getDAO('ReviewFormResponseDAO');
+		$reviewFormResponses = array();
+				
+		if ($authorSubmission->getReviewAssignments($stage)) {
+			foreach ($authorSubmission->getReviewAssignments($stage) as $reviewAssignment) {
+				$reviewFormResponses[$reviewAssignment->getId()] = $reviewFormResponseDao->reviewFormResponseExists($reviewAssignment->getId());
+			}
+		}
+		
 		$directorDecisions = $authorSubmission->getDecisions($authorSubmission->getCurrentStage());
 		$lastDecision = count($directorDecisions) >= 1 ? $directorDecisions[count($directorDecisions) - 1] : null;
 
 		$templateMgr =& TemplateManager::getManager();
+		// EDIT Show reviewers decisions and review forms.
+		$templateMgr->assign_by_ref('reviewIndexes', $reviewAssignmentDao->getReviewIndexesForStage($paperId, $stage));
+		$templateMgr->assign('reviewFormResponses', $reviewFormResponses);
+		// END EDIT
 		$templateMgr->assign_by_ref('submission', $authorSubmission);
 		$templateMgr->assign_by_ref('reviewAssignments', $authorSubmission->getReviewAssignments($stage));
 		$templateMgr->assign('stage', $stage);

@@ -37,7 +37,7 @@
 		<td class="label" width="20%">
 			{translate key="submission.initiated"}
 		</td>
-		<td class="value" width="80%">
+		<td class="value">
 			{if $reviewEarliestNotificationByStage[$stage]}
 				{$reviewEarliestNotificationByStage[$stage]|date_format:$dateFormatShort}
 			{else}
@@ -49,7 +49,7 @@
 		<td class="label" width="20%">
 			{translate key="submission.lastModified"}
 		</td>
-		<td class="value" width="80%">
+		<td class="value">
 			{if $reviewModifiedByStage[$stage]}
 				{$reviewModifiedByStage[$stage]|date_format:$dateFormatShort}
 			{else}
@@ -57,6 +57,43 @@
 			{/if}
 		</td>
 	</tr>
+	
+	<!-- EDIT Show reviewers decisions and review forms. -->
+	{assign var="start" value="A"|ord}
+	
+	{foreach from=$reviewAssignments item=reviewAssignment key=reviewKey}
+	{assign var="reviewId" value=$reviewAssignment->getId()}
+	
+	{if not $reviewAssignment->getCancelled()} {* Cancelled reviews are still in the system *}
+		{assign var="reviewIndex" value=$reviewIndexes[$reviewId]}
+		{if $reviewAssignment->getDateConfirmed() && !$reviewAssignment->getDeclined()}
+		<tr>
+		
+			<td class="label" width="20%"><h4>{translate key="user.role.reviewer"} {$reviewIndex+$start|chr}</h4></td>
+			<td class="value">
+				{if $reviewAssignment->getRecommendation() !== null && $reviewAssignment->getRecommendation() !== ''}
+						{assign var="recommendation" value=$reviewAssignment->getRecommendation()}
+						{translate key=$reviewerRecommendationOptions.$recommendation}
+						&nbsp;&nbsp;{$reviewAssignment->getDateCompleted()|date_format:$dateFormatShort}
+					{else}
+						{translate key="common.none"}&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="{url op="remindReviewer" paperId=$submission->getPaperId() reviewId=$reviewAssignment->getId()}" class="action">{translate key="reviewer.paper.sendReminder"}</a>
+						{if $reviewAssignment->getDateReminded()}
+							&nbsp;&nbsp;{$reviewAssignment->getDateReminded()|date_format:$dateFormatShort}
+							{if $reviewAssignment->getReminderWasAutomatic()}
+								&nbsp;&nbsp;{translate key="reviewer.paper.automatic"}
+							{/if}
+						{/if}
+					{/if}
+				<strong>Hodnocení</strong>&nbsp;Odkaz na recenzi.
+			</td>
+		</tr>
+		{/if}
+	{/if}
+	{/foreach}
+	<!-- END EDIT -->
+	
+	<!-- EDIT Hide different file versions.
 	<tr valign="top">
 		<td class="label" width="20%">
 			{translate key="common.uploadedFile"}
@@ -99,5 +136,6 @@
 			</td>
 		</tr>
 	{/if}
+	-->
 </table>
 </div>

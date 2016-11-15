@@ -46,6 +46,10 @@ switch ($op) {
 	case 'viewMetadata':
 	case 'saveMetadata':
 	//
+	//	Review Form
+	//
+	case 'viewReviewFormResponse':
+	//
 	// Misc.
 	//
 	case 'downloadFile':

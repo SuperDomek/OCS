@@ -71,21 +71,16 @@
 		
 			<td class="label" width="20%"><h4>{translate key="user.role.reviewer"} {$reviewIndex+$start|chr}</h4></td>
 			<td class="value">
+			{* reviewAssignment has a recommendation *}
 				{if $reviewAssignment->getRecommendation() !== null && $reviewAssignment->getRecommendation() !== ''}
-						{assign var="recommendation" value=$reviewAssignment->getRecommendation()}
-						{translate key=$reviewerRecommendationOptions.$recommendation}
-						&nbsp;&nbsp;{$reviewAssignment->getDateCompleted()|date_format:$dateFormatShort}
-					{else}
-						{translate key="common.none"}&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="{url op="remindReviewer" paperId=$submission->getPaperId() reviewId=$reviewAssignment->getId()}" class="action">{translate key="reviewer.paper.sendReminder"}</a>
-						{if $reviewAssignment->getDateReminded()}
-							&nbsp;&nbsp;{$reviewAssignment->getDateReminded()|date_format:$dateFormatShort}
-							{if $reviewAssignment->getReminderWasAutomatic()}
-								&nbsp;&nbsp;{translate key="reviewer.paper.automatic"}
-							{/if}
-						{/if}
-					{/if}
-				<strong>Hodnocení</strong>&nbsp;Odkaz na recenzi.
+					{assign var="recommendation" value=$reviewAssignment->getRecommendation()}
+					<strong>{translate key=$reviewerRecommendationOptions.$recommendation}</strong>
+					{if $reviewFormResponses[$reviewId]}
+					<a href="javascript:openComments('{url op="viewReviewFormResponse" path=$submission->getPaperId()|to_array:$reviewAssignment->getId()}');" class="icon">{icon name="letter"}</a>
+			{/if}
+				{else}
+					{translate key="common.none"}
+				{/if}
 			</td>
 		</tr>
 		{/if}

@@ -185,8 +185,10 @@ class TrackSubmissionHandler extends AuthorHandler {
 
 		$templateMgr =& TemplateManager::getManager();
 		// EDIT Show reviewers decisions and review forms.
+		import('submission.reviewAssignment.ReviewAssignment');
 		$templateMgr->assign_by_ref('reviewIndexes', $reviewAssignmentDao->getReviewIndexesForStage($paperId, $stage));
 		$templateMgr->assign('reviewFormResponses', $reviewFormResponses);
+		$templateMgr->assign_by_ref('reviewerRecommendationOptions', ReviewAssignment::getReviewerRecommendationOptions());
 		// END EDIT
 		$templateMgr->assign_by_ref('submission', $authorSubmission);
 		$templateMgr->assign_by_ref('reviewAssignments', $authorSubmission->getReviewAssignments($stage));
@@ -368,6 +370,25 @@ class TrackSubmissionHandler extends AuthorHandler {
 		}
 	}
 
+	//
+	// ReviewForm
+	//
+	
+	/**
+	 * View review form response.
+	 * @param $args array ($paperId, $reviewId)
+	 */
+	function viewReviewFormResponse($args) {
+		$paperId = isset($args[0]) ? (int) $args[0] : 0;
+		$this->validate($paperId);
+		$submission =& $this->submission;
+		$this->setupTemplate(true, $paperId, 'summary');
+
+		$reviewId = isset($args[1]) ? (int) $args[1] : null;
+
+		TrackDirectorAction::viewReviewFormResponse($submission, $reviewId);
+	}
+	
 	//
 	// Misc
 	//

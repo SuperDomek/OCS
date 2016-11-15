@@ -20,7 +20,7 @@
 		<td>
 			{if $lastDirectorDecision}
 				{assign var="decision" value=$lastDirectorDecision.decision}
-				{translate key=$directorDecisionOptions.$decision} {$lastDirectorDecision.dateDecided|date_format:$dateFormatShort}
+				<strong>{translate key=$directorDecisionOptions.$decision}</strong> {$lastDirectorDecision.dateDecided|date_format:$dateFormatShort}
 			{else}
 				&mdash;
 			{/if}
@@ -43,6 +43,7 @@
 			{/if}
 		</td>
 	</tr>
+	<!-- EDIT Hide file upload options.
 	<tr valign="top">
 		<td class="label" width="20%">
 			{translate key="submission.directorVersion"}
@@ -85,9 +86,11 @@
 
 		</td>
 	</tr>
+	-->
 </table>
 </div>
+<!-- EDIT Hide Layout section. No need in the conference.
 <div class="separator"></div>
 
 {include file="author/submission/layout.tpl"}
-
+-->

@@ -120,7 +120,9 @@
 
 	<!-- Navigation -->
 	<message key="navigation.conferenceHelp">Conference Help</message>
-	<message key="navigation.account">Account</message>
+	<!-- EDIT Slim interface -->
+	<message key="navigation.account">Register</message>
+	<!-- END EDIT -->
 	<message key="navigation.archive">Archive</message>
 	<message key="navigation.current">Current Conferences</message>
 	<message key="navigation.otherConferences">Other Conferences</message>

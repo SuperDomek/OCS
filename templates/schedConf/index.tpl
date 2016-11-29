@@ -19,13 +19,6 @@
 {include file="common/header.tpl"}
 {/strip}
 
-<h2>{$schedConf->getSetting('locationName')|nl2br}</h2>
-{if $schedConf->getSetting('startDate')}
-	{assign var=startDate value=$schedConf->getSetting('startDate')|date_format:$dateFormatLong}
-	{assign var=endDate value=$schedConf->getSetting('endDate')|date_format:$dateFormatLong}
-	<h2>{$startDate}{if $startDate != $endDate} &ndash; {$endDate}{/if}</h2>
-{/if}
-
 <br />
 
 <div>{$schedConf->getLocalizedSetting("introduction")|nl2br}</div>

@@ -215,7 +215,8 @@ class SubmissionEditHandler extends TrackDirectorHandler {
 				* and review forms (table:review_form_settings)
 				* the numbers taked directly from database.
 				*/
-
+				
+				$reviewId =& $reviewAssignment->getId();
 				$reviewForm =& $reviewFormDao->getReviewForm($reviewAssignment->getReviewFormId());
 				$sessionType = $submission->getData('sessionType'); // to get type of submission
 				if ($reviewForm) {
@@ -235,6 +236,15 @@ class SubmissionEditHandler extends TrackDirectorHandler {
 						exit();
 					}
 					
+				}
+				// Automaticly send Acknowledge e-mail if the review is done
+				if ($reviewAssignment->getRecommendation() !== null && $reviewAssignment->getRecommendation() !== '') {
+					if(!$reviewAssignment->getDateAcknowledged()){
+						if (TrackDirectorAction::thankReviewer($submission, $reviewId, true)) {
+							header("Refresh:0"); // reload page
+							exit();	// stop executing code so page reloads instanteously
+						}
+					}
 				}
 				unset($reviewForm);
 				$reviewFormResponses[$reviewAssignment->getId()] = $reviewFormResponseDao->reviewFormResponseExists($reviewAssignment->getId());

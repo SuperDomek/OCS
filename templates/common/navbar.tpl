@@ -14,19 +14,21 @@
 		{if $isUserLoggedIn}
 			<li><a href="{url conference="index" page="user"}">{translate key="navigation.userHome"}</a></li>
 		{else}
+			<!-- EDIT Slim interface
 			<li><a href="{url page="login"}">{translate key="navigation.login"}</a></li>
+			-->
 			<li><a href="{url page="user" op="account"}">{translate key="navigation.account"}</a></li>
 		{/if}{* $isUserLoggedIn *}
-		
-		<!-- Edit
+
+		<!-- EDIT Slim interface
 		<li><a href="{url page="search"}">{translate key="navigation.search"}</a></li>
-		End Edit -->
+		-->
 
 		{if $currentConference}
-			<!-- Edit
+			<!-- EDIT Slim interface
 			{if $currentSchedConfsExist}<li><a href="{url schedConf="index" page="schedConfs" op="current"}">{translate key="navigation.current"}</a></li>{/if}
 			{if $archivedSchedConfsExist}<li><a href="{url schedConf="index" page="schedConfs" op="archive"}">{translate key="navigation.archive"}</a></li>{/if}
-			Edit -->
+			-->
 			{if $enableAnnouncements}
 				<li><a href="{url page="announcement"}">{translate key="announcement.announcements"}</a></li>
 			{/if}{* $enableAnnouncements *}

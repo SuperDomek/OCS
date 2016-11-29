@@ -22,6 +22,7 @@
 		{/iterate}
 	</ul>
 {/if}
+
 <div id="people">
 <h3>{translate key="about.people"}</h3>
 <ul class="plain">
@@ -32,6 +33,7 @@
 	{call_hook name="Templates::About::Index::People"}
 </ul>
 </div>
+
 <div id="policies">
 <h3>{translate key="about.policies"}</h3>
 <ul class="plain">
@@ -46,16 +48,7 @@
 	{call_hook name="Templates::About::Index::Policies"}
 </ul>
 </div>
-<div id="submissions">
-<h3>{translate key="about.submissions"}</h3>
-<ul class="plain">
-	<li>&#187; <a href="{url op="submissions" anchor="onlineSubmissions"}">{translate key="about.onlineSubmissions"}</a></li>
-	{if $currentSchedConf && $currentSchedConf->getLocalizedSetting('authorGuidelines') != ''}<li>&#187; <a href="{url op="submissions" anchor="authorGuidelines"}">{translate key="about.authorGuidelines"}</a></li>{/if}
-	{if $currentConference->getLocalizedSetting('copyrightNotice') != ''}<li>&#187; <a href="{url op="submissions" anchor="copyrightNotice"}">{translate key="about.copyrightNotice"}</a></li>{/if}
-	{if $currentConference->getLocalizedSetting('privacyStatement') != ''}<li>&#187; <a href="{url op="submissions" anchor="privacyStatement"}">{translate key="about.privacyStatement"}</a></li>{/if}
-	{call_hook name="Templates::About::Index::Submissions"}
-</ul>
-</div>
+
 <div id="other">
 <h3>{translate key="about.other"}</h3>
 <ul class="plain">

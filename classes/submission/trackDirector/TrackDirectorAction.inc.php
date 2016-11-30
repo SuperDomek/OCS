@@ -552,9 +552,10 @@ class TrackDirectorAction extends Action {
 	 * Thanks a reviewer for completing a review assignment.
 	 * @param $trackDirectorSubmission object
 	 * @param $reviewId int
+	 * @param $auto bool set true if e-mail to be sent automatically
 	 * @return boolean true iff ready for redirect
 	 */
-	function thankReviewer($trackDirectorSubmission, $reviewId, $send = false) {
+	function thankReviewer($trackDirectorSubmission, $reviewId, $send = false, $auto = false) {
 		$trackDirectorSubmissionDao =& DAORegistry::getDAO('TrackDirectorSubmissionDAO');
 		$reviewAssignmentDao =& DAORegistry::getDAO('ReviewAssignmentDAO');
 		$userDao =& DAORegistry::getDAO('UserDAO');
@@ -570,8 +571,25 @@ class TrackDirectorAction extends Action {
 		if ($reviewAssignment->getPaperId() == $trackDirectorSubmission->getPaperId()) {
 			$reviewer =& $userDao->getUser($reviewAssignment->getReviewerId());
 			if (!isset($reviewer)) return true;
+			/* EDIT added if statement for automatical setup of fields*/
+			if($auto){ //
+				$email->addRecipient($reviewer->getEmail(), $reviewer->getFullName());
+				$paramArray = array(
+						'reviewerName' => $reviewer->getFullName(),
+						'editorialContactSignature' => $user->getContactSignature()
+					);
+				$email->assignParams($paramArray);
+				if ($email->isEnabled()) {
+					$email->setAssoc(PAPER_EMAIL_REVIEW_THANK_REVIEWER, PAPER_EMAIL_TYPE_REVIEW, $reviewId);
+					$email->send();
+				}
 
-			if (!$email->isEnabled() || ($send && !$email->hasErrors())) {
+				$reviewAssignment->setDateAcknowledged(Core::getCurrentDate());
+				$reviewAssignment->stampModified();
+				$reviewAssignmentDao->updateReviewAssignment($reviewAssignment);
+			}
+			/*END EDIT*/
+			elseif (!$email->isEnabled() || ($send && !$email->hasErrors())) {
 				HookRegistry::call('TrackDirectorAction::thankReviewer', array(&$trackDirectorSubmission, &$reviewAssignment, &$email));
 				if ($email->isEnabled()) {
 					$email->setAssoc(PAPER_EMAIL_REVIEW_THANK_REVIEWER, PAPER_EMAIL_TYPE_REVIEW, $reviewId);
@@ -591,6 +609,7 @@ class TrackDirectorAction extends Action {
 					);
 					$email->assignParams($paramArray);
 				}
+				
 				$email->displayEditForm(Request::url(null, null, null, 'thankReviewer', 'send'), array('reviewId' => $reviewId, 'paperId' => $trackDirectorSubmission->getPaperId()));
 				return false;
 			}

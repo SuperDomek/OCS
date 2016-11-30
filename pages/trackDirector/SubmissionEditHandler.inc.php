@@ -238,14 +238,14 @@ class SubmissionEditHandler extends TrackDirectorHandler {
 					
 				}
 				// Automaticly send Acknowledge e-mail if the review is done
-				/*if ($reviewAssignment->getRecommendation() !== null && $reviewAssignment->getRecommendation() !== '') {
+				if ($reviewAssignment->getRecommendation() !== null && $reviewAssignment->getRecommendation() !== '') {
 					if(!$reviewAssignment->getDateAcknowledged()){
-						if (TrackDirectorAction::thankReviewer($submission, $reviewId, true)) {
+						if (TrackDirectorAction::thankReviewer($submission, $reviewId, false, true)) {
 							header("Refresh:0"); // reload page
 							exit();	// stop executing code so page reloads instanteously
 						}
 					}
-				}*/
+				}
 				unset($reviewForm);
 				$reviewFormResponses[$reviewAssignment->getId()] = $reviewFormResponseDao->reviewFormResponseExists($reviewAssignment->getId());
 			}

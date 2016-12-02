@@ -163,6 +163,7 @@
 	<message key="common.status">Status</message>
 	<message key="common.subject">Subject</message>
 	<message key="common.suggest">Suggest</message>
+	<message key="common.thankReviewer">An automatic thanking e-mail was sent to the reviewer.</message>
 	<message key="common.title">Title</message>
 	<message key="common.top">Top</message>
 	<message key="common.true">True</message>

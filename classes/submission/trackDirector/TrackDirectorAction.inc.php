@@ -587,6 +587,11 @@ class TrackDirectorAction extends Action {
 				$reviewAssignment->setDateAcknowledged(Core::getCurrentDate());
 				$reviewAssignment->stampModified();
 				$reviewAssignmentDao->updateReviewAssignment($reviewAssignment);
+				
+				// EDIT generate automatic notification 
+				import('notification.NotificationManager');
+				$notificationManager = new NotificationManager();
+				$notificationManager->createTrivialNotification('notification.notification', 'common.thankReviewer');
 			}
 			/*END EDIT*/
 			elseif (!$email->isEnabled() || ($send && !$email->hasErrors())) {

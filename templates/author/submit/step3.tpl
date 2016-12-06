@@ -100,19 +100,6 @@ function moveAuthor(dir, authorIndex) {
 		<span class="instruct">{translate key="user.affiliation.description"}</span>
 	</td>
 </tr>
-<tr valign="top">
-	<td width="20%" class="label">{fieldLabel name="authors-$authorIndex-country" key="common.country"}</td>
-	<td width="80%" class="value">
-		<select name="authors[{$authorIndex|escape}][country]" id="authors-{$authorIndex|escape}-country" class="selectMenu">
-			<option value=""></option>
-			{html_options options=$countries selected=$author.country}
-		</select>
-	</td>
-</tr>
-<tr valign="top">
-	<td width="20%" class="label">{fieldLabel name="authors-$authorIndex-biography" key="user.biography"}<br />{translate key="user.biography.description"}</td>
-	<td width="80%" class="value"><textarea name="authors[{$authorIndex|escape}][biography][{$formLocale|escape}]" class="textArea" id="authors-{$authorIndex|escape}-biography" rows="5" cols="40">{$author.biography[$formLocale]|escape}</textarea></td>
-</tr>
 {if $smarty.foreach.authors.total > 1}
 <tr valign="top">
 	<td colspan="2">
@@ -153,25 +140,12 @@ function moveAuthor(dir, authorIndex) {
 	</td>
 </tr>
 <tr valign="top">
-	<td width="20%" class="label">{fieldLabel name="authors-0-country" key="common.country"}</td>
-	<td width="80%" class="value">
-		<select name="authors[0][country]" id="authors-0-country" class="selectMenu">
-			<option value=""></option>
-			{html_options options=$countries}
-		</select>
-	</td>
-</tr>
-<tr valign="top">
 	<td width="20%" class="label">{fieldLabel name="authors-0-email" required="true" key="user.email"}</td>
 	<td width="80%" class="value"><input type="text" class="textField" name="authors[0][email]" id="authors-0-email" size="30" maxlength="90" /></td>
 </tr>
 <tr valign="top">
 	<td width="20%" class="label">{fieldLabel name="authors-0-url" required="true" key="user.url"}</td>
 	<td width="80%" class="value"><input type="text" class="textField" name="authors[0][url]" id="authors-0-url" size="30" maxlength="90" /></td>
-</tr>
-<tr valign="top">
-	<td width="20%" class="label">{fieldLabel name="authors-0-biography" key="user.biography"}<br />{translate key="user.biography.description"}</td>
-	<td width="80%" class="value"><textarea name="authors[0][biography]" class="textArea" id="authors-0-biography[{$formLocale|escape}]" rows="5" cols="40"></textarea></td>
 </tr>
 </table>
 {/foreach}
@@ -322,19 +296,6 @@ function moveAuthor(dir, authorIndex) {
 </tr>
 <tr valign="top">
 	<td><span class="instruct">{translate key="author.submit.languageInstructions"}</span></td>
-</tr>
-</table>
-</div>
-<div class="separator"></div>
-
-<div id="supportingAgencies">
-<h3>{translate key="author.submit.submissionSupportingAgencies"}</h3>
-<p>{translate key="author.submit.submissionSupportingAgenciesDescription"}</p>
-
-<table width="100%" class="data">
-<tr valign="top">
-	<td width="20%" class="label">{fieldLabel name="sponsor" key="submission.agencies"}</td>
-	<td width="80%" class="value"><input type="text" class="textField" name="sponsor[{$formLocale|escape}]" id="sponsor" value="{$sponsor[$formLocale]|escape}" size="60" maxlength="255" /></td>
 </tr>
 </table>
 </div>

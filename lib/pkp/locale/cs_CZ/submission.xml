@@ -198,7 +198,7 @@
 	<message key="submission.restrictions">Omezení</message>
 	<message key="submission.reviewMetadata">Zkontrolovat metadata</message>
 	<message key="submission.review">Recenze</message>
-	<message key="submission.reviewVersion">Verze recenze</message>
+	<message key="submission.reviewVersion">Verze článku</message>
 	<message key="submissions.active">Aktivní</message>
 	<message key="submissions.archived">Archivované</message>
 	<message key="submission.saveMetadata">Uložit metadata</message>

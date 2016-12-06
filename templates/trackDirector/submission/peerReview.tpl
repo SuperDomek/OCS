@@ -67,45 +67,6 @@
 				<td width="80%" class="nodata">{translate key="common.none"}</td>
 			{/if}
 		</tr>
-		<!-- EDIT Hide revised file Supp.files. Conference doesn't support uploading of supp. files.
-		{if not $isStageDisabled}
-		<tr valign="top">
-			<td colspan="2">
-				<form method="post" action="{url op="uploadReviewVersion"}" enctype="multipart/form-data">
-					{translate key="director.paper.uploadReviewVersion"}
-					<input type="hidden" name="paperId" value="{$submission->getPaperId()}" />
-					<input type="file" name="upload" class="uploadField" />
-					<input type="submit" name="submit" value="{translate key="common.upload"}" class="button" />
-				</form>
-			</td>
-		</tr>
-		{/if}
-		
-		{foreach from=$suppFiles item=suppFile}
-			<tr valign="top">
-				{if !$notFirstSuppFile}
-					<td class="label" rowspan="{$suppFiles|@count}">{translate key="paper.suppFilesAbbrev"}</td>
-						{assign var=notFirstSuppFile value=1}
-				{/if}
-				<td width="80%" class="value nowrap">
-					<form method="post" action="{url op="setSuppFileVisibility"}">
-						<input type="hidden" name="paperId" value="{$submission->getPaperId()}" />
-						<input type="hidden" name="fileId" value="{$suppFile->getId()}" />
-						<a href="{url op="downloadFile" path=$submission->getPaperId()|to_array:$suppFile->getFileId():$suppFile->getRevision()}" class="file">{$suppFile->getFileName()|escape}</a>&nbsp;&nbsp;
-						{$suppFile->getDateModified()|date_format:$dateFormatShort}
-						<label for="show">{translate key="director.paper.showSuppFile"}</label>
-						<input type="checkbox" {if !$mayEditPaper}disabled="disabled" {/if}name="show" id="show" value="1"{if $suppFile->getShowReviewers()==1} checked="checked"{/if}/>
-						<input type="submit" {if !$mayEditPaper}disabled="disabled" {/if}name="submit" value="{translate key="common.record"}" class="button" />
-					</form>
-				</td>
-			</tr>
-		{foreachelse}
-			<tr valign="top">
-				<td class="label">{translate key="paper.suppFilesAbbrev"}</td>
-				<td class="nodata">{translate key="common.none"}</td>
-			</tr>
-		{/foreach}
-		-->
 	{/if}
 </table>
 
@@ -254,7 +215,7 @@
 			</tr>
 			<!--
 			-- EDIT Hide simple textual review. The conference uses reviewForms only.
-			
+
 			<tr valign="top">
 				<td class="label">{translate key="submission.review"}</td>
 				<td>
@@ -275,36 +236,6 @@
 				</td>
 			</tr>
 			{/if}
-			<!--
-			-- EDIT Hide uploaded file. The conference won't use uploading of files.
-			
-			<tr valign="top">
-				<td class="label">{translate key="reviewer.paper.uploadedFile"}</td>
-				<td>
-					<table width="100%" class="data">
-						{foreach from=$reviewAssignment->getReviewerFileRevisions() item=reviewerFile key=key}
-						<tr valign="top">
-							<td valign="middle">
-								<form name="authorView{$reviewAssignment->getId()}" method="post" action="{url op="makeReviewerFileViewable"}">
-									<a href="{url op="downloadFile" path=$submission->getPaperId()|to_array:$reviewerFile->getFileId():$reviewerFile->getRevision()}" class="file">{$reviewerFile->getFileName()|escape}</a>&nbsp;&nbsp;{$reviewerFile->getDateModified()|date_format:$dateFormatShort}
-									<input type="hidden" name="reviewId" value="{$reviewAssignment->getId()}" />
-									<input type="hidden" name="paperId" value="{$submission->getPaperId()}" />
-									<input type="hidden" name="fileId" value="{$reviewerFile->getFileId()}" />
-									<input type="hidden" name="revision" value="{$reviewerFile->getRevision()}" />
-									{translate key="director.paper.showAuthor"} <input type="checkbox" name="viewable" value="1"{if $reviewerFile->getViewable()} checked="checked"{/if} />
-									<input type="submit" value="{translate key="common.record"}" class="button" />
-								</form>
-							</td>
-						</tr>
-						{foreachelse}
-						<tr valign="top">
-							<td>{translate key="common.none"}</td>
-						</tr>
-						{/foreach}
-					</table>
-				</td>
-			</tr>
-			-->
 		{/if}
 
 		{if (($reviewAssignment->getRecommendation() === null || $reviewAssignment->getRecommendation() === '') || !$reviewAssignment->getDateConfirmed()) && $reviewAssignment->getDateNotified() && !$reviewAssignment->getDeclined()}

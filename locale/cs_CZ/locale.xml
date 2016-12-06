@@ -216,7 +216,7 @@
 	<message key="submission.directorReview">Posudek předsedy</message>
 	<message key="submission.notifyAuthor">Oznámit autorovi</message>
 	<message key="submission.notifyDirector">Informovat předsedu</message>
-	<message key="submission.directorAuthorRecord">Email předsedy a autora</message>
+	<message key="submission.directorAuthorRecord">Napsat e-mail</message>
 	<message key="submission.directorVersion">Verze pro předsedu</message>
 	<message key="submission.authorsRevisedVersion">Verze souboru upraveného autorem</message>
 	<message key="submission.authorVersion">Verze pro autora</message>

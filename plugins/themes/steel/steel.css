@@ -64,11 +64,12 @@ input.defaultButton {
 	background-color: #f9f9f9;
 	border-left: 1px solid black;
 	border-right: 1px solid black;
-	border-bottom: 1px solid black;	
+	border-bottom: 1px solid black;
 }
 
 #main h2 {
 	font-family: Garamond,'Times New Roman',Times,serif;
+	font-weight: bold;
 }
 
 #main h3 {
@@ -89,11 +90,9 @@ input.defaultButton {
 
 #content h3 {
 	font-family: Garamond,'Times New Roman',Times,serif;
+	font-weight: bold;
 }
 
 #content h4 {
 	font-family: Garamond,'Times New Roman',Times,serif;
 }
-
-
-

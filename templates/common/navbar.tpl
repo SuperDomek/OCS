@@ -12,7 +12,8 @@
 		<li><a href="{url context=$homeContext op="index"}">{translate key="navigation.home"}</a></li>
 		<li><a href="{url page="about"}">{translate key="navigation.about"}</a></li>
 		{if $isUserLoggedIn}
-			<li><a href="{url conference="index" page="user"}">{translate key="navigation.userHome"}</a></li>
+      <!--<li><a href="{url conference="index" page="user"}">{translate key="navigation.userHome"}</a></li>-->
+			<li><a href="{url schedConf="index" page="user"}">{translate key="navigation.userHome"}</a></li>
 		{else}
 			<!-- EDIT Slim interface
 			<li><a href="{url page="login"}">{translate key="navigation.login"}</a></li>

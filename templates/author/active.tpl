@@ -68,20 +68,55 @@
 					</a>
 				{else}
 					<a class="action" href="{$submitUrl}">{translate key="submissions.pendingPresentation"}</a>
-				{/if}	
+				{/if}
 			</td>
 		{/if}
 
 	</tr>
+  {if $submissions->eof()}
+  <tr>
+    <td colspan="6" class="separator">&nbsp;</td>
+  </tr>
+    {* EDIT Prettier adding of submissions *}
+    {if $acceptingSubmissions}
 
-	<tr>
-		<td colspan="6" class="{if $submissions->eof()}end{/if}separator">&nbsp;</td>
-	</tr>
+      <tr>
+        <td colspan="6" class="action" align="center"><strong><a href="{url op="submit"}" class="action">{translate key="author.submit"}</a></strong></td>
+      </tr>
+    {else}
+      <tr>
+        <td colspan="6" class="action" align="center"><strong>{$notAcceptingSubmissionsMessage}</strong></td>
+      </tr>
+    {/if}
+    {* EDIT END *}
+    <tr>
+      <td colspan="6" class="endseparator">&nbsp;</td>
+    </tr>
+  {else}
+    <tr>
+      <td colspan="6" class="separator">&nbsp;</td>
+    </tr>
+  {/if}
+
 {/iterate}
+
+
+
 {if $submissions->wasEmpty()}
 	<tr>
 		<td colspan="6" class="nodata">{translate key="submissions.noSubmissions"}</td>
 	</tr>
+  {* EDIT Prettier adding of submissions *}
+  {if $acceptingSubmissions}
+    <tr>
+      <td colspan="6" class="action" align="center"><strong><a href="{url op="submit"}" class="action">{translate key="author.submit"}</a></strong></td>
+    </tr>
+  {else}
+    <tr>
+      <td colspan="6" class="action" align="center"><strong>{$notAcceptingSubmissionsMessage}</strong></td>
+    </tr>
+  {/if}
+  {* EDIT END *}
 	<tr>
 		<td colspan="6" class="endseparator">&nbsp;</td>
 	</tr>

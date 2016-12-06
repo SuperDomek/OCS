@@ -21,16 +21,16 @@
 <br />
 
 {include file="author/$pageToDisplay.tpl"}
-
+<!--
 {if $acceptingSubmissions}
-	<p>
-		{translate key="author.submit.startHere"}<br/>
-		<a href="{url op="submit"}" class="action">{translate key="author.submit.startHereLink"}</a><br />
-	</p>
+	<h3>
+		{translate key="author.submit.startHere"}
+  </h3>
+		<strong><a href="{url op="submit"}" class="action">{translate key="author.submit.startHereLink"}</a><br /></strong>
 {else}
 	<p>
 		{$notAcceptingSubmissionsMessage}
 	</p>
 {/if}
-
+-->
 {include file="common/footer.tpl"}

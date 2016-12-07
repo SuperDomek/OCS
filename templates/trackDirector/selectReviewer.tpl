@@ -23,7 +23,7 @@ function sortSearch(heading, direction) {
 }
 // -->
 {/literal}
-</script> 
+</script>
 
 <h3>{translate key="director.paper.selectReviewer"}</h3>
 <form name="submit" method="post" action="{url op="selectReviewer" path=$paperId}">
@@ -53,13 +53,13 @@ function sortSearch(heading, direction) {
 <tr><td colspan="{$numCols|escape}" class="headseparator">&nbsp;</td></tr>
 <tr class="heading" valign="bottom">
 	<td width="20%">{sort_search key="user.name" sort="reviewerName"}</td>
+  <td width="15%">{translate key="user.affiliation"|escape}</td>
 	<td>{translate key="user.interests"}</td>
 	{if $rateReviewerOnQuality}
 		<td width="7%">{sort_search key="reviewer.averageQuality" sort="quality"}</td>
 	{/if}
 	<td width="7%">{sort_search key="reviewer.completedReviews" sort="done"}</td>
-	<td width="7%">{sort_search key="director.submissions.averageTime" sort="average"}</td>
-	<td width="13%">{sort_search key="director.submissions.lastAssigned" sort="latest"}</td>
+	<td width="10%">{sort_search key="director.submissions.lastAssigned" sort="latest"}</td>
 	<td width="5%">{sort_search key="common.active" sort="active"}</td>
 	<td width="7%" class="heading">{translate key="common.action"}</td>
 </tr>
@@ -71,6 +71,7 @@ function sortSearch(heading, direction) {
 
 <tr valign="top">
 	<td><a class="action" href="{url op="userProfile" path=$userId}">{$reviewer->getFullName()|escape}</a></td>
+  <td>{$reviewer->getAffiliation()|escape}</td>
 	<td>{$reviewer->getLocalizedInterests()|escape}</td>
 	{if $rateReviewerOnQuality}<td>
 		{if $qualityCount}{$averageQualityRatings[$userId].average|string_format:"%.1f"}
@@ -85,13 +86,6 @@ function sortSearch(heading, direction) {
 		{/if}
 	</td>
 
-	<td>
-		{if $reviewerStats.average_span}
-			{math equation="round(theSpan)" theSpan=$reviewerStats.average_span}
-		{else}
-			&mdash;
-		{/if}
-	</td>
 	<td>{if $reviewerStats.last_notified}{$reviewerStats.last_notified|date_format:$dateFormatShort}{else}&mdash;{/if}</td>
 	<td>{$reviewerStats.incomplete|default:0}</td>
 	<td>

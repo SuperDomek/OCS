@@ -81,7 +81,7 @@
 
 	<!--  peer review -->
 	<message key="submission.reviewForm">Formulář posudku</message>
-	<message key="submission.reviewFormResponse">Reakce na posudek</message>
+	<message key="submission.reviewFormResponse">Posudek recenzenta</message>
 
 	<message key="editor.paper.reviewForms">Formuláře posudků</message>
 	<message key="editor.paper.selectReviewForm">Zvolte formulář posudku</message>

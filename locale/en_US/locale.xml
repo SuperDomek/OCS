@@ -78,7 +78,7 @@
 
 	<!--  peer review -->
 	<message key="submission.reviewForm">Review Form</message>
-	<message key="submission.reviewFormResponse">Review Form Response</message>
+	<message key="submission.reviewFormResponse">Review from reviewer</message>
 
 	<message key="editor.paper.reviewForms">Review Forms</message>
 	<message key="editor.paper.selectReviewForm">Select Review Form</message>

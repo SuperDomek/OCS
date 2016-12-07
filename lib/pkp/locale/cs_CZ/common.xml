@@ -146,6 +146,7 @@
 	<message key="common.removeSelection">Odstranit výběr</message>
 	<message key="common.replaced">Nahrazeno</message>
 	<message key="common.replaceFile">Nahradit soubor</message>
+	<message key="common.requestReviewer">Byl automaticky odeslán email s žádostí o recenzování.</message>
 	<message key="common.requiredField">* Označuje povinnou položku</message>
 	<message key="common.required">Povinný</message>
 	<message key="common.saveAndContinue">Uložit a pokračovat</message>

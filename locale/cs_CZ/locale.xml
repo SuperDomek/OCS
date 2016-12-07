@@ -84,7 +84,7 @@
 	<message key="submission.reviewFormResponse">Posudek recenzenta</message>
 
 	<message key="editor.paper.reviewForms">Formuláře posudků</message>
-	<message key="editor.paper.selectReviewForm">Zvolte formulář posudku</message>
+	<message key="editor.paper.selectReviewForm">Změnit formulář posudku</message>
 	<message key="editor.paper.clearReviewForm">Vymazat posudek</message>
 	<message key="editor.paper.confirmChangeReviewForm">Upozornění: Změna posudkového formuláře ovlivní veškeré odpovědi posuzovatelů, kteří formulář využijí. Skutečně chcete pokračovat?</message>
 

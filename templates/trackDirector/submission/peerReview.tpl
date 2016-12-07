@@ -161,6 +161,7 @@
 								{icon name="mail" url=$reviewUrl disabled="true"}
 							{elseif $reviewAssignment->getDateNotified()}
 								{$reviewAssignment->getDateNotified()|date_format:$dateFormatShort}
+                &nbsp;
 								{if !$reviewAssignment->getDateCompleted()}
 									{icon name="mail" url=$reviewUrl}
 								{/if}

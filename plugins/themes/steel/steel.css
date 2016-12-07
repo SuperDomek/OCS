@@ -96,3 +96,7 @@ input.defaultButton {
 #content h4 {
 	font-family: Garamond,'Times New Roman',Times,serif;
 }
+
+.bold {
+	font-weight: bold;
+}

@@ -195,7 +195,7 @@
 	<message key="paper.fontSize.small.altText">Small</message>
 	<message key="paper.fontSize.medium.altText">Medium</message>
 	<message key="paper.fontSize.large.altText">Large</message>
-	<message key="paper.sessionType">Session Type</message>
+	<message key="paper.sessionType">Submission type</message>
 
 	<!-- Submission Tracking - Common -->
 	<message key="submission.fromTime">From</message>

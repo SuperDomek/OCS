@@ -198,7 +198,7 @@
 	<message key="paper.fontSize.small.altText">Malé</message>
 	<message key="paper.fontSize.medium.altText">Střední</message>
 	<message key="paper.fontSize.large.altText">Velké</message>
-	<message key="paper.sessionType">Typ sekce</message>
+	<message key="paper.sessionType">Typ příspěvku</message>
 
 	<!-- Submission Tracking - Common -->
 	<message key="submission.fromTime">Od</message>

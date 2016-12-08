@@ -25,8 +25,6 @@ class SubmissionEditHandler extends TrackDirectorHandler {
 	/** submission associated with the request **/
 	var $submission;
 
-	// DELETE testovaci promenna
-	var $testovaci;
 	/**
 	 * Constructor
 	 **/

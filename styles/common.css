@@ -348,3 +348,7 @@ a.largeFont:hover {
 	background: url(../lib/pkp/templates/images/icons/font-up.png);
 	color: none;
 }
+
+a.always{
+	color: #ab3834 !important;
+}

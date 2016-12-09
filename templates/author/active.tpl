@@ -10,16 +10,17 @@
  *}
 <div id="submissions">
 <table class="listing" width="100%">
-	<tr><td colspan="6" class="headseparator">&nbsp;</td></tr>
+	<tr><td colspan="7" class="headseparator">&nbsp;</td></tr>
 	<tr class="heading" valign="bottom">
 		<td width="5%">{sort_heading key="common.id" sort="id"}</td>
 		<td width="5%"><span class="disabled">MM-DD</span><br />{sort_heading key="submissions.submit" sort="submitDate"}</td>
 		<td width="5%">{sort_heading key="submissions.track" sort="track"}</td>
+    <td width="10%">{translate key="paper.sessionType"}</td>
 		<td width="25%">{sort_heading key="paper.authors" sort="authors"}</td>
 		<td width="35%">{sort_heading key="paper.title" sort="title"}</td>
-		<td width="25%" align="right">{sort_heading key="common.status" sort="status"}</td>
+		<td width="15%" align="right">{sort_heading key="common.status" sort="status"}</td>
 	</tr>
-	<tr><td colspan="6" class="headseparator">&nbsp;</td></tr>
+	<tr><td colspan="7" class="headseparator">&nbsp;</td></tr>
 
 {iterate from=submissions item=submission}
 	{assign var="paperId" value=$submission->getPaperId()}
@@ -31,6 +32,13 @@
 		<td>{$paperId|escape}</td>
 		<td>{if $submission->getDateSubmitted()}{$submission->getDateSubmitted()|date_format:$dateFormatTrunc}{else}&mdash;{/if}</td>
 		<td>{$submission->getTrackAbbrev()|escape}</td>
+    <td>
+      {assign var="sessionTypeId" value=$submission->getData('sessionType')}
+      {if $sessionTypeId}
+        {assign var="sessionType" value=$sessionTypes.$sessionTypeId}
+        {$sessionType->getLocalizedName()|escape}
+      {/if}
+    </td>
 		<td>{$submission->getAuthorString(true)|truncate:40:"..."|escape}</td>
 		{if $submissionProgress == 0}
 			<td><a href="{url op="submission" path=$paperId}" class="action">{if $submission->getLocalizedTitle()}{$submission->getLocalizedTitle()|strip_tags|truncate:60:"..."}{else}{translate key="common.untitled"}{/if}</a></td>
@@ -75,26 +83,26 @@
 	</tr>
   {if $submissions->eof()}
   <tr>
-    <td colspan="6" class="separator">&nbsp;</td>
+    <td colspan="7" class="separator">&nbsp;</td>
   </tr>
     {* EDIT Prettier adding of submissions *}
     {if $acceptingSubmissions}
 
       <tr>
-        <td colspan="6" class="action" align="center"><strong><a href="{url op="submit"}" class="action always">{translate key="author.submit"}</a></strong></td>
+        <td colspan="7" class="action" align="center"><strong><a href="{url op="submit"}" class="action always">{translate key="author.submit"}</a></strong></td>
       </tr>
     {else}
       <tr>
-        <td colspan="6" class="action" align="center"><strong>{$notAcceptingSubmissionsMessage}</strong></td>
+        <td colspan="7" class="action" align="center"><strong>{$notAcceptingSubmissionsMessage}</strong></td>
       </tr>
     {/if}
     {* EDIT END *}
     <tr>
-      <td colspan="6" class="endseparator">&nbsp;</td>
+      <td colspan="7" class="endseparator">&nbsp;</td>
     </tr>
   {else}
     <tr>
-      <td colspan="6" class="separator">&nbsp;</td>
+      <td colspan="7" class="separator">&nbsp;</td>
     </tr>
   {/if}
 
@@ -104,25 +112,25 @@
 
 {if $submissions->wasEmpty()}
 	<tr>
-		<td colspan="6" class="nodata">{translate key="submissions.noSubmissions"}</td>
+		<td colspan="7" class="nodata">{translate key="submissions.noSubmissions"}</td>
 	</tr>
   {* EDIT Prettier adding of submissions *}
   {if $acceptingSubmissions}
     <tr>
-      <td colspan="6" class="action" align="center"><strong><a href="{url op="submit"}" class="action always">ahoj{translate key="author.submit"}</a></strong></td>
+      <td colspan="7" class="action" align="center"><strong><a href="{url op="submit"}" class="action always">ahoj{translate key="author.submit"}</a></strong></td>
     </tr>
   {else}
     <tr>
-      <td colspan="6" class="action" align="center"><strong>{$notAcceptingSubmissionsMessage}</strong></td>
+      <td colspan="7" class="action" align="center"><strong>{$notAcceptingSubmissionsMessage}</strong></td>
     </tr>
   {/if}
   {* EDIT END *}
 	<tr>
-		<td colspan="6" class="endseparator">&nbsp;</td>
+		<td colspan="7" class="endseparator">&nbsp;</td>
 	</tr>
 {else}
 	<tr>
-		<td colspan="4" align="left">{page_info iterator=$submissions}</td>
+		<td colspan="5" align="left">{page_info iterator=$submissions}</td>
 		<td colspan="2" align="right">{page_links anchor="submissions" name="submissions" iterator=$submissions sort=$sort sortDirection=$sortDirection}</td>
 	</tr>
 {/if}

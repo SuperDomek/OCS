@@ -40,9 +40,10 @@ class AuthorHandler extends Handler {
 	function index($args) {
 		$this->validate();
 		$this->setupTemplate();
-		
+
 		$conference =& Request::getConference();
 		$schedConf =& Request::getSchedConf();
+		$schedConfId = $schedConf->getId();
 
 		$user =& Request::getUser();
 		$rangeInfo =& Handler::getRangeInfo('submissions');
@@ -57,7 +58,7 @@ class AuthorHandler extends Handler {
 				$page = 'active';
 				$active = true;
 		}
-		
+
 		$sort = Request::getUserVar('sort');
 		$sort = isset($sort) ? $sort : 'id';
 		$sortDirection = Request::getUserVar('sortDirection');
@@ -73,13 +74,14 @@ class AuthorHandler extends Handler {
 			}
 			$compare = create_function('$s1, $s2', 'return strcmp($s1->getSubmissionStatus(), $s2->getSubmissionStatus());');
 			usort ($submissionsArray, $compare);
-			
+
 			// Convert submission array back to an ItemIterator class
 			import('core.ArrayItemIterator');
 			$submissions =& ArrayItemIterator::fromRangeInfo($submissionsArray, $rangeInfo);
 		} else {
 			$submissions = $authorSubmissionDao->getAuthorSubmissions($user->getId(), $schedConf->getId(), $active, $rangeInfo, $sort, $sortDirection);
 		}
+
 
 		$templateMgr =& TemplateManager::getManager();
 		$templateMgr->assign('pageToDisplay', $page);
@@ -102,6 +104,14 @@ class AuthorHandler extends Handler {
 		} else {
 			$acceptingSubmissions = true;
 		}
+
+		$sessionTypesArray = array();
+		$paperTypeDao = DAORegistry::getDAO('PaperTypeDAO');
+		$sessionTypes = $paperTypeDao->getPaperTypes($schedConfId);
+		while ($sessionType = $sessionTypes->next()) {
+			$sessionTypesArray[$sessionType->getId()] = $sessionType;
+		}
+		$templateMgr->assign('sessionTypes', $sessionTypesArray);
 
 		$templateMgr->assign('acceptingSubmissions', $acceptingSubmissions);
 		if(isset($notAcceptingSubmissionsMessage))

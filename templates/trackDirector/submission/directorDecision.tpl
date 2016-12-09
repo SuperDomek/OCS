@@ -32,11 +32,27 @@
 		{foreach from=$directorDecisions item=directorDecision key=decisionKey}
 			{if $decisionKey neq 0} | {/if}
 			{assign var="decision" value=$directorDecision.decision}
-			{translate key=$directorDecisionOptions.$decision}&nbsp;&nbsp;{$directorDecision.dateDecided|date_format:$dateFormatShort}
+			<strong>{translate key=$directorDecisionOptions.$decision}</strong>&nbsp;&nbsp;{$directorDecision.dateDecided|date_format:$dateFormatShort}
 		{foreachelse}
-			{translate key="common.none"}
+			<strong>{translate key="common.none"}</strong>
 		{/foreach}
 	</td>
+</tr>
+<tr valign="top">
+  <td class="label">{translate key="submission.directorComment"}</td>
+  <td class="value" colspan="2">
+    {if $submission->getMostRecentDirectorDecisionComment()}
+			{assign var="comment" value=$submission->getMostRecentDirectorDecisionComment()}
+			<a href="javascript:openComments('{url op="viewDirectorDecisionComments" path=$submission->getPaperId() anchor=$comment->getId()}');">{translate key="submission.directorComment.enter"}</a>&nbsp;&nbsp;{icon name="accept"}
+		{else}
+			<a href="javascript:openComments('{url op="viewDirectorDecisionComments" path=$submission->getPaperId()}');">{translate key="submission.directorComment.enter"}</a>&nbsp;&nbsp;{icon name="action_stop"}
+		{/if}
+		{if $lastDecision == SUBMISSION_DIRECTOR_DECISION_DECLINE}
+			<br />
+			{if $submission->getStatus() == STATUS_ARCHIVED}{translate key="submissions.archived"}{else}<a href="{url op="archiveSubmission" path=$submission->getPaperId()}" onclick="return window.confirm('{translate|escape:"jsparam" key="director.submissionReview.confirmToArchive"}')" class="action">{translate key="director.paper.sendToArchive"}</a>{/if}
+			{if $submission->getDateToArchive()}{$submission->getDateToArchive()|date_format:$dateFormatShort}{/if}
+		{/if}
+  </td>
 </tr>
 <tr valign="top">
 	<td class="label">{translate key="submission.notifyAuthor"}</td>
@@ -44,17 +60,7 @@
     <a href="{url op="emailDirectorDecisionComment" paperId=$submission->getPaperId()}">{translate key="submission.directorAuthorRecord"}</a>
 		&nbsp;&nbsp;&nbsp;&nbsp;
 
-		{if $submission->getMostRecentDirectorDecisionComment()}
-			{assign var="comment" value=$submission->getMostRecentDirectorDecisionComment()}
-			<a href="javascript:openComments('{url op="viewDirectorDecisionComments" path=$submission->getPaperId() anchor=$comment->getId()}');" class="icon">{icon name="comment"}</a>&nbsp;&nbsp;{$comment->getDatePosted()|date_format:$dateFormatShort}
-		{else}
-			<a href="javascript:openComments('{url op="viewDirectorDecisionComments" path=$submission->getPaperId()}');" class="icon">{icon name="comment"}</a>{translate key="common.noComments"}
-		{/if}
-		{if $lastDecision == SUBMISSION_DIRECTOR_DECISION_DECLINE}
-			<br />
-			{if $submission->getStatus() == STATUS_ARCHIVED}{translate key="submissions.archived"}{else}<a href="{url op="archiveSubmission" path=$submission->getPaperId()}" onclick="return window.confirm('{translate|escape:"jsparam" key="director.submissionReview.confirmToArchive"}')" class="action">{translate key="director.paper.sendToArchive"}</a>{/if}
-			{if $submission->getDateToArchive()}{$submission->getDateToArchive()|date_format:$dateFormatShort}{/if}
-		{/if}
+
 	</td>
 </tr>
 </table>

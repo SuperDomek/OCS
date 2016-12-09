@@ -208,6 +208,8 @@
 	<message key="submission.changeTrack">Change to</message>
 	<message key="submission.acceptance">Agreed to Review</message>
 	<message key="submission.complete.description">Add the submission to the list of accepted Presentations.</message>
+	<message key="submission.directorComment">Decision comment</message>
+	<message key="submission.directorComment.enter">Write a comment to the decision</message>
 	<message key="submission.directorDecision">Director Decision</message>
 	<message key="submission.stage">Stage&amp;nbsp;{$stage}</message>
 	<message key="submission.directorReview">Director Review</message>

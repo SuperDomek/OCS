@@ -1593,7 +1593,7 @@ import('file.PaperFileManager');
 		if ($send && !$email->hasErrors()) {
 			HookRegistry::call('TrackDirectorAction::emailDirectorDecisionComment', array(&$trackDirectorSubmission, &$send));
 			$email->send();
-
+			/* EDIT Don't add e-mail text to comments
 			$paperComment = new PaperComment();
 			$paperComment->setCommentType(COMMENT_TYPE_DIRECTOR_DECISION);
 			$paperComment->setRoleId(Validation::isDirector()?ROLE_ID_DIRECTOR:ROLE_ID_TRACK_DIRECTOR);
@@ -1605,7 +1605,7 @@ import('file.PaperFileManager');
 			$paperComment->setViewable(true);
 			$paperComment->setAssocId($trackDirectorSubmission->getPaperId());
 			$paperCommentDao->insertPaperComment($paperComment);
-
+			*/
 			return true;
 		} else {
 			if (!Request::getUserVar('continued')) {

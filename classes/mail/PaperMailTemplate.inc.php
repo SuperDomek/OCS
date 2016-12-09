@@ -73,10 +73,11 @@ class PaperMailTemplate extends MailTemplate {
 	 */
 	function send() {
 		if (parent::send()) {
-			if (!isset($this->skip) || !$this->skip) $this->log();
+			/*if (!isset($this->skip) || !$this->skip) */$this->log();
 			return true;
 
 		} else {
+			$this->log();
 			return false;
 		}
 	}

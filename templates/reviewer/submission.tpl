@@ -264,56 +264,6 @@ function confirmSubmissionCheck() {
 
 <tr valign="top" class="bold">
 	<td>{$currentStep|escape}.{assign var="currentStep" value=$currentStep+1}</td>
-	<td><span class="instruct">{translate key="reviewer.paper.uploadFile"}</span></td>
-</tr>
-<tr valign="top">
-	<td>&nbsp;</td>
-	<td>
-		<table class="data" width="100%">
-			{foreach from=$submission->getReviewerFileRevisions() item=reviewerFile key=key}
-				{assign var=uploadedFileExists value="1"}
-				<tr valign="top">
-				<td class="label" width="30%">
-					{if $key eq "0"}
-						{translate key="reviewer.paper.uploadedFile"}
-					{/if}
-				</td>
-				<td class="value" width="70%">
-					<a href="{url op="downloadFile" path=$reviewId|to_array:$paperId:$reviewerFile->getFileId():$reviewerFile->getRevision()}" class="file">{$reviewerFile->getFileName()|escape}</a>
-					{$reviewerFile->getDateModified()|date_format:$dateFormatShort}
-					{if ($submission->getRecommendation() === null || $submission->getRecommendation() === '') && (!$submission->getCancelled())}
-						<a class="action" href="{url op="deleteReviewerVersion" path=$reviewId|to_array:$reviewerFile->getFileId():$reviewerFile->getRevision()}">{translate key="common.delete"}</a>
-					{/if}
-				</td>
-				</tr>
-			{foreachelse}
-				<tr valign="top">
-				<td class="label" width="30%">
-					{translate key="reviewer.paper.uploadedFile"}
-				</td>
-				<td class="nodata">
-					{translate key="common.none"}
-				</td>
-				</tr>
-			{/foreach}
-		</table>
-		{if $submission->getRecommendation() === null || $submission->getRecommendation() === ''}
-			<form method="post" action="{url op="uploadReviewerVersion"}" enctype="multipart/form-data">
-				<input type="hidden" name="reviewId" value="{$reviewId|escape}" />
-				<input type="file" name="upload" {if not $confirmedStatus or $declined or $submission->getCancelled()}disabled="disabled"{/if} class="uploadField" />
-				<input type="submit" name="submit" value="{translate key="common.upload"}" {if not $confirmedStatus or $declined or $submission->getCancelled()}disabled="disabled"{/if} class="button" />
-			</form>
-			<!-- <span class="instruct">
-				<a class="action" href="javascript:openHelp('{get_help_id key="editorial.trackDirectorsRole.review.blindPeerReview" url="true"}')">{translate key="reviewer.paper.ensuringBlindReview"}</a>
-			</span> -->
-		{/if}
-	</td>
-</tr>
-<tr>
-	<td colspan="2">&nbsp;</td>
-</tr>
-<tr valign="top" class="bold">
-	<td>{$currentStep|escape}.{assign var="currentStep" value=$currentStep+1}</td>
 	<td><span class="instruct">{translate key="reviewer.paper.selectRecommendation"}</span></td>
 </tr>
 <tr valign="top">
@@ -327,6 +277,7 @@ function confirmSubmissionCheck() {
 					{assign var="recommendation" value=$submission->getRecommendation()}
 					<strong>{translate key=$reviewerRecommendationOptions.$recommendation}</strong>&nbsp;&nbsp;
 					{$submission->getDateCompleted()|date_format:$dateFormatShort}
+          &nbsp;&nbsp;{icon name="accept"}
 				{else}
 					<form name="recommendation" method="post" action="{url op="recordRecommendation"}">
 					<input type="hidden" name="reviewId" value="{$reviewId|escape}" />
@@ -334,6 +285,7 @@ function confirmSubmissionCheck() {
 						{html_options_translate options=$reviewerRecommendationOptions selected=''}
 					</select>&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" name="submit" onclick="return confirmSubmissionCheck()" class="button" value="{translate key="reviewer.paper.submitReview"}" {if not $confirmedStatus or $declined or $submission->getCancelled() or (!$reviewFormResponseExists and !$reviewAssignment->getMostRecentPeerReviewComment() and !$uploadedFileExists)}disabled="disabled"{/if} />
+          &nbsp;&nbsp;{icon name="action_stop"}
 					</form>
 				{/if}
 				</td>

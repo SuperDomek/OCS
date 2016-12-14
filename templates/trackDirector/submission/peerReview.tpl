@@ -140,7 +140,10 @@
 			{translate key="manager.reviewForms.noneChosen"}
 		{/if}
 		{if !$reviewAssignment->getDateCompleted()}
-			&nbsp;&nbsp;&nbsp;&nbsp;<a class="action" href="{url op="selectReviewForm" path=$submission->getPaperId()|to_array:$reviewAssignment->getId()}"{if $reviewFormResponses[$reviewId]} onclick="return confirm('{translate|escape:"jsparam" key="editor.paper.confirmChangeReviewForm"}')"{/if}>{translate key="editor.paper.selectReviewForm"}</a>{if $reviewAssignment->getReviewFormId()}&nbsp;&nbsp;&nbsp;&nbsp;<a class="action" href="{url op="clearReviewForm" path=$submission->getPaperId()|to_array:$reviewAssignment->getId()}"{if $reviewFormResponses[$reviewId]} onclick="return confirm('{translate|escape:"jsparam" key="editor.paper.confirmChangeReviewForm"}')"{/if}>{translate key="editor.paper.clearReviewForm"}</a>{/if}
+			{if $reviewAssignment->getReviewFormId()}
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="action" href="{url op="clearReviewForm" path=$submission->getPaperId()|to_array:$reviewAssignment->getId()}"{if $reviewFormResponses[$reviewId]} onclick="return confirm('{translate|escape:"jsparam" key="editor.paper.confirmChangeReviewForm"}')"{/if}>{translate key="editor.paper.clearReviewForm"}</a>
+      {/if}
 		{/if}
 		</td>
 	</tr>
@@ -214,21 +217,7 @@
 					{/if}
 				</td>
 			</tr>
-			<!--
-			-- EDIT Hide simple textual review. The conference uses reviewForms only.
-
-			<tr valign="top">
-				<td class="label">{translate key="submission.review"}</td>
-				<td>
-					{if $reviewAssignment->getMostRecentPeerReviewComment()}
-						{assign var="comment" value=$reviewAssignment->getMostRecentPeerReviewComment()}
-						<a href="javascript:openComments('{url op="viewPeerReviewComments" path=$submission->getPaperId()|to_array:$reviewAssignment->getId() anchor=$comment->getId()}');" class="icon">{icon name="letter"}</a>&nbsp;&nbsp;{$comment->getDatePosted()|date_format:$dateFormatShort}
-					{else}
-						<a href="javascript:openComments('{url op="viewPeerReviewComments" path=$submission->getPaperId()|to_array:$reviewAssignment->getId()}');" class="icon">{icon name="letter"}</a>&nbsp;&nbsp;{translate key="submission.comments.noComments"}
-					{/if}
-				</td>
-			</tr>
-			-->
+			
 			{if $reviewFormResponses[$reviewId]}
 			<tr valign="top">
 				<td class="label">{translate key="submission.reviewFormResponse"}</td>
@@ -239,6 +228,7 @@
 			{/if}
 		{/if}
 
+<!-- EDIT Hide section editor review control section
 		{if (($reviewAssignment->getRecommendation() === null || $reviewAssignment->getRecommendation() === '') || !$reviewAssignment->getDateConfirmed()) && $reviewAssignment->getDateNotified() && !$reviewAssignment->getDeclined()}
 			<tr valign="top">
 				<td class="label">{translate key="reviewer.paper.directorToEnter"}</td>
@@ -259,7 +249,7 @@
 				</td>
 			</tr>
 		{/if}
-
+-->
 		{if $reviewAssignment->getDateNotified() && !$reviewAssignment->getDeclined() && $rateReviewerOnQuality}
 			<tr valign="top">
 				<td class="label">{translate key="director.paper.rateReviewer"}</td>

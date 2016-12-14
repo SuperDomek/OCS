@@ -9,7 +9,7 @@
  * @class SubmissionCommentsHandler
  * @ingroup pages_trackDirector
  *
- * @brief Handle requests for submission comments. 
+ * @brief Handle requests for submission comments.
  */
 
 //$Id$
@@ -19,7 +19,7 @@ import('pages.trackDirector.SubmissionEditHandler');
 class SubmissionCommentsHandler extends TrackDirectorHandler {
 	/** comment associated with the request **/
 	var $comment;
-	
+
 	/**
 	 * Constructor
 	 **/
@@ -41,7 +41,7 @@ class SubmissionCommentsHandler extends TrackDirectorHandler {
 		$submissionEditHandler->validate($paperId);
 		$paperDao =& DAORegistry::getDAO('PaperDAO');
 		$submission =& $paperDao->getPaper($paperId);
-		
+
 		TrackDirectorAction::viewPeerReviewComments($submission, $reviewId);
 	}
 
@@ -81,7 +81,7 @@ class SubmissionCommentsHandler extends TrackDirectorHandler {
 		$submissionEditHandler->validate($paperId);
 		$paperDao =& DAORegistry::getDAO('PaperDAO');
 		$submission =& $paperDao->getPaper($paperId);
-		
+
 		TrackDirectorAction::viewDirectorDecisionComments($submission);
 	}
 
@@ -101,9 +101,10 @@ class SubmissionCommentsHandler extends TrackDirectorHandler {
 		$submissionEditHandler->validate($paperId);
 		$paperDao =& DAORegistry::getDAO('PaperDAO');
 		$submission =& $paperDao->getPaper($paperId);
-		
+
 		if (TrackDirectorAction::postDirectorDecisionComment($submission, $emailComment)) {
-			TrackDirectorAction::viewDirectorDecisionComments($submission);
+			echo "<script>window.close();</script>"; // close the window instead of reloading
+			//TrackDirectorAction::viewDirectorDecisionComments($submission);
 		}
 	}
 
@@ -136,7 +137,7 @@ class SubmissionCommentsHandler extends TrackDirectorHandler {
 		$trackDirectorSubmissionDao =& DAORegistry::getDAO('TrackDirectorSubmissionDAO');
 		$submission =& $trackDirectorSubmissionDao->getTrackDirectorSubmission($paperId);
 
-		parent::setupTemplate(true);		
+		parent::setupTemplate(true);
 		if (TrackDirectorAction::emailDirectorDecisionComment($submission, Request::getUserVar('send'))) {
 			if (Request::getUserVar('blindCcReviewers')) {
 				$this->blindCcReviewsToReviewers();
@@ -161,7 +162,7 @@ class SubmissionCommentsHandler extends TrackDirectorHandler {
 		$this->addCheck(new HandlerValidatorSubmissionComment($this, $commentId));
 		$this->validate();
 		$comment =& $this->comment;
-		
+
 		$this->setupTemplate(true);
 
 		if ($comment->getCommentType() == COMMENT_TYPE_DIRECTOR_DECISION) {
@@ -188,12 +189,12 @@ class SubmissionCommentsHandler extends TrackDirectorHandler {
 		$comment =& $this->comment;
 
 		$this->setupTemplate(true);
-		
+
 		$submissionEditHandler = new SubmissionEditHandler();
 		$submissionEditHandler->validate($paperId);
 		$paperDao =& DAORegistry::getDAO('PaperDAO');
 		$submission =& $paperDao->getPaper($paperId);
-		
+
 		if ($comment->getCommentType() == COMMENT_TYPE_DIRECTOR_DECISION) {
 			// Cannot edit a director decision comment.
 			Request::redirect(null, null, Request::getRequestedPage());
@@ -220,7 +221,7 @@ class SubmissionCommentsHandler extends TrackDirectorHandler {
 	function deleteComment($args) {
 		$paperId = $args[0];
 		$commentId = $args[1];
-		
+
 		$this->addCheck(new HandlerValidatorSubmissionComment($this, $commentId));
 		$this->validate();
 		$comment =& $this->comment;
@@ -229,7 +230,7 @@ class SubmissionCommentsHandler extends TrackDirectorHandler {
 		$submissionEditHandler->validate($paperId);
 		$paperDao =& DAORegistry::getDAO('PaperDAO');
 		$submission =& $paperDao->getPaper($paperId);
-		
+
 		TrackDirectorAction::deleteComment($commentId);
 
 		// Redirect back to initial comments page

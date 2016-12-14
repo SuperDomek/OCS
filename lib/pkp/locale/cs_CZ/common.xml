@@ -122,7 +122,7 @@
 	<message key="common.noneAssigned">Nikdo nepřidělen</message>
 	<message key="common.none">Žádný</message>
 	<message key="common.no">Ne</message>
-	<message key="common.noComments">Bez komentářů</message>
+	<message key="common.noComments">Bez komentáře</message>
 	<message key="common.notApplicable">Neaplikovatelný</message>
 	<message key="common.notApplicableShort">N/A</message>
 	<message key="common.notAvailable">Nedostupný</message>

@@ -33,6 +33,16 @@ function confirmSubmissionCheck() {
 	}
 	return confirm('{/literal}{translate|escape:"javascript" key="reviewer.paper.confirmDecision"}{literal}');
 }
+
+function markComplete() {
+  if(document.recommendation.recommendation.value != ''){
+    document.getElementById('rec_select_icon').innerHTML = {/literal}'{icon name="accept"}'{literal};
+  }
+  else{
+    document.getElementById('rec_select_icon').innerHTML = {/literal}'{icon name="action_stop"}'{literal};
+  }
+  return;
+}
 // -->
 {/literal}
 </script>
@@ -281,11 +291,12 @@ function confirmSubmissionCheck() {
 				{else}
 					<form name="recommendation" method="post" action="{url op="recordRecommendation"}">
 					<input type="hidden" name="reviewId" value="{$reviewId|escape}" />
-					<select name="recommendation" {if not $confirmedStatus or $declined or $submission->getCancelled() or (!$reviewFormResponseExists and !$reviewAssignment->getMostRecentPeerReviewComment() and !$uploadedFileExists)}disabled="disabled"{/if} class="selectMenu">
+					<select name="recommendation" {if not $confirmedStatus or $declined or $submission->getCancelled() or (!$reviewFormResponseExists and !$reviewAssignment->getMostRecentPeerReviewComment() and !$uploadedFileExists)}disabled="disabled"{/if} class="selectMenu" onchange="markComplete();">
 						{html_options_translate options=$reviewerRecommendationOptions selected=''}
-					</select>&nbsp;&nbsp;&nbsp;&nbsp;
+					</select>
+          &nbsp;&nbsp;<span id="rec_select_icon">{icon name="action_stop"}</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" name="submit" onclick="return confirmSubmissionCheck()" class="button" value="{translate key="reviewer.paper.submitReview"}" {if not $confirmedStatus or $declined or $submission->getCancelled() or (!$reviewFormResponseExists and !$reviewAssignment->getMostRecentPeerReviewComment() and !$uploadedFileExists)}disabled="disabled"{/if} />
-          &nbsp;&nbsp;{icon name="action_stop"}
 					</form>
 				{/if}
 				</td>

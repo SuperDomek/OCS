@@ -287,7 +287,6 @@ function markComplete() {
 					{assign var="recommendation" value=$submission->getRecommendation()}
 					<strong>{translate key=$reviewerRecommendationOptions.$recommendation}</strong>&nbsp;&nbsp;
 					{$submission->getDateCompleted()|date_format:$dateFormatShort}
-          &nbsp;&nbsp;{icon name="accept"}
 				{else}
 					<form name="recommendation" method="post" action="{url op="recordRecommendation"}">
 					<input type="hidden" name="reviewId" value="{$reviewId|escape}" />

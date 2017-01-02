@@ -7,12 +7,16 @@
  * Navigation Bar
  *
  *}
+
+ {$currentYear}
 <div id="navbar">
 	<ul class="menu">
 		<li><a href="{url context=$homeContext op="index"}">{translate key="navigation.home"}</a></li>
-		<li><a href="{url page="about"}">{translate key="navigation.about"}</a></li>
+    <!-- Hardcoded redirect to 2017 conference -->
+		<li><a href="{url schedConf="2017" page="about"}">{translate key="navigation.about"}</a></li>
 		{if $isUserLoggedIn}
       <!--<li><a href="{url conference="index" page="user"}">{translate key="navigation.userHome"}</a></li>-->
+
 			<li><a href="{url schedConf="index" page="user"}">{translate key="navigation.userHome"}</a></li>
 		{else}
 			<!-- EDIT Slim interface
@@ -20,7 +24,13 @@
 			-->
 			<li><a href="{url page="user" op="account"}">{translate key="navigation.account"}</a></li>
 		{/if}{* $isUserLoggedIn *}
-
+{php}
+/*$everything = get_defined_vars();
+ksort($everything);
+echo '<pre>';
+print_r($everything);
+echo '</pre>';*/
+{/php}
 		<!-- EDIT Slim interface
 		<li><a href="{url page="search"}">{translate key="navigation.search"}</a></li>
 		-->

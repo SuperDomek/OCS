@@ -139,6 +139,8 @@ class AuthorSubmitForm extends Form {
 	function assignDirectors(&$paper) {
 		$trackId = $paper->getTrackId();
 		$schedConf =& Request::getSchedConf();
+		$conference =& Request::getConference();
+		$paperId = $paper->getId();
 
 		$trackDirectorsDao =& DAORegistry::getDAO('TrackDirectorsDAO');
 		$editAssignmentDao =& DAORegistry::getDAO('EditAssignmentDAO');
@@ -147,9 +149,32 @@ class AuthorSubmitForm extends Form {
 
 		foreach ($trackDirectors as $trackDirector) {
 			$editAssignment = new EditAssignment();
-			$editAssignment->setPaperId($paper->getId());
+			$editAssignment->setPaperId($paperId);
 			$editAssignment->setDirectorId($trackDirector->getId());
 			$editAssignmentDao->insertEditAssignment($editAssignment);
+
+			// Automatically send notification e-mail
+			// to the assigned director
+			import('mail.PaperMailTemplate');
+			$email = new PaperMailTemplate($paper, 'DIRECTOR_ASSIGN');
+			$email->addRecipient($trackDirector->getEmail(), $trackDirector->getFullName());
+			$paramArray = array(
+				'directorUsername' => $trackDirector->getUsername(),
+				'directorPassword' => $trackDirector->getPassword(),
+				'editorialContactSignature' => $schedConf->getSetting('contactName') . "\n" . $conference->getConferenceTitle(),
+				'submissionUrl' => Request::url(null, null, 'trackDirector', 'submissionReview', $paperId)
+			);
+			$email->assignParams($paramArray);
+			$email->setFrom($schedConf->getSetting('contactEmail'), $schedConf->getSetting('contactName'));
+			$email->setAssoc(PAPER_EMAIL_DIRECTOR_ASSIGN, PAPER_EMAIL_TYPE_DIRECTOR, $trackDirector->getId());
+
+			// Add log
+			import('paper.log.PaperLog');
+			import('paper.log.PaperEventLogEntry');
+			PaperLog::logEvent($paperId, PAPER_LOG_DIRECTOR_ASSIGN, LOG_TYPE_DEFAULT, $trackDirector->getId(), 'log.director.directorAssigned', array('directorName' => $trackDirector->getFullName(), 'paperId' => $paperId));
+
+			$email->send();
+
 			unset($editAssignment);
 		}
 

@@ -1584,6 +1584,8 @@ import('file.PaperFileManager');
 			case SUBMISSION_DIRECTOR_DECISION_DECLINE:
 				$templateName = $isAbstract?'SUBMISSION_ABSTRACT_DECLINE':'SUBMISSION_PAPER_DECLINE';
 				break;
+			default:
+				$templateName = 'DirectorDecisionComment';
 		}
 
 		$user =& Request::getUser();

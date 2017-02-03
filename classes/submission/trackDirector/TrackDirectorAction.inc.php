@@ -74,10 +74,11 @@ class TrackDirectorAction extends Action {
 		);
 
 		if (!HookRegistry::call('TrackDirectorAction::recordDecision', array(&$trackDirectorSubmission, $directorDecision))) {
-			if ($decision == SUBMISSION_DIRECTOR_DECISION_DECLINE) {
+			if ($decision == SUBMISSION_DIRECTOR_DECISION_DECLINE || $decision == SUBMISSION_DIRECTOR_DECISION_PUNISH) {
 				$trackDirectorSubmission->setStatus(STATUS_DECLINED);
 				$trackDirectorSubmission->stampStatusModified();
-			} else {
+			}
+			else {
 				$trackDirectorSubmission->setStatus(STATUS_QUEUED);
 				$trackDirectorSubmission->stampStatusModified();
 			}

@@ -110,7 +110,8 @@ class UserHandler extends Handler {
 			
 			$this->getRoleDataForConference($userId, $conferenceId, 0, $submissionsCount, $isValid);
 
-			$schedConfs =& $schedConfDao->getSchedConfsByConferenceId($conferenceId);
+			// EDIT changed function to get only the most recent scheduled conference
+			$schedConfs =& $schedConfDao->getCurrentSchedConfs($conferenceId);
 			while($schedConf =& $schedConfs->next()) {
 				$schedConfId = $schedConf->getId();
 				$schedConfRoles =& $roleDao->getRolesByUserId($userId, $conferenceId, $schedConfId);

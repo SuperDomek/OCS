@@ -22,12 +22,13 @@
 {if !$currentConference}<h3>{translate key="user.myConferences"}</h3>{/if}
 
 {foreach from=$userConferences item=conference}
-{assign var="hasRole" value=1}
+{*assign var="hasRole" value=1*}
 {assign var="conferenceId" value=$conference->getId()}
 {assign var="conferencePath" value=$conference->getPath()}
 
 <div id="conference">
   		{if $isValid.ConferenceManager.$conferenceId.0}
+			{assign var="hasRole" value=1}
 <h4><a href="{url conference=$conference->getPath() page="user"}">{$conference->getConferenceTitle()|escape}</a></h4>
 	{* Display conference roles *}
 
@@ -51,6 +52,7 @@
 
 		<table width="100%" class="info">
 			{if $isValid.Director.$conferenceId.$schedConfId}
+			{assign var="hasRole" value=1}
 				<tr>
 					{assign var="directorSubmissionsCount" value=$submissionsCount.Director.$conferenceId.$schedConfId}
 					<td>&#187; <a href="{url conference=$conferencePath schedConf=$schedConfPath  schedConf=$schedConfPath page="director"}">{translate key="user.role.director"}</a></td>
@@ -69,6 +71,7 @@
 				</tr>
 			{/if}
 			{if $isValid.TrackDirector.$conferenceId.$schedConfId}
+			{assign var="hasRole" value=1}
 				{assign var="trackDirectorSubmissionsCount" value=$submissionsCount.TrackDirector.$conferenceId.$schedConfId}
 				<tr>
 					<td>&#187; <a href="{url conference=$conferencePath schedConf=$schedConfPath  page="trackDirector"}">{translate key="user.role.trackDirector"}</a></td>
@@ -83,6 +86,7 @@
 				</tr>
 			{/if}
 			{if $isValid.Author.$conferenceId.$schedConfId || $isValid.Reviewer.$conferenceId.$schedConfId}
+			{assign var="hasRole" value=1}
 				<tr><td class="separator" width="100%" colspan="5">&nbsp;</td></tr>
 			{/if}
 			{if $isValid.Author.$conferenceId.$schedConfId}

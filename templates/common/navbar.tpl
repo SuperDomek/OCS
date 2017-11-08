@@ -12,8 +12,8 @@
 <div id="navbar">
 	<ul class="menu">
 		<li><a href="{url context=$homeContext op="index"}">{translate key="navigation.home"}</a></li>
-    <!-- Hardcoded redirect to 2017 conference -->
-		<li><a href="{url schedConf="2017" page="about"}">{translate key="navigation.about"}</a></li>
+			{* Hardcoded redirect to 2017 conference *}
+		<li><a href="{url schedConf="2018" page="about"}">{translate key="navigation.about"}</a></li>
 		{if $isUserLoggedIn}
       <!--<li><a href="{url conference="index" page="user"}">{translate key="navigation.userHome"}</a></li>-->
 

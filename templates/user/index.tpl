@@ -136,7 +136,7 @@
 {if !$hasRole}
 	{if !$currentSchedConf}
 		<p>{translate key="user.noRoles.chooseConference"}</p>
-		{foreach from=$allConferences item=thisConference key=conferenceId}
+		{foreach from=$allSchedConfs item=thisConference key=conferenceId}
 			<h4>{$thisConference->getConferenceTitle()|escape}</h4>
 			{if !empty($allSchedConfs[$conferenceId])}
 			<ul class="plain">
@@ -146,6 +146,8 @@
 			</ul>
 			{/if}{* !empty($allSchedConfs[$conferenceId]) *}
 		{/foreach}
+		{url|assign:"sourceUrl" page="user"}
+		<a href="{url schedConf="2018" page="user" op="become" path="reviewer" source=$sourceUrl}">{translate key="user.noRoles.regReviewer"}</a>
 	{else}{* !$currentSchedConf *}
 		<p>{translate key="user.noRoles.noRolesForConference"}</p>
 		<ul class="plain">
@@ -179,6 +181,9 @@
 				{/if}{* $schedConfPaymentsEnabled *}
 			</li>
 		</ul>
+				{url|assign:"sourceUrl" page="user"}
+		<a href="{url schedConf=$currentSchedConf->getPath() page="user" op="become" path="reviewer" source=$sourceUrl}">{translate key="user.noRoles.regReviewer"}</a>
+
 	{/if}{* !$currentSchedConf *}
 {/if}
 

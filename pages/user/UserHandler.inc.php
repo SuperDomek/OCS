@@ -107,6 +107,9 @@ class UserHandler extends Handler {
 		} else {  // Currently within a conference's context
 			$conferenceId = $conference->getId();
 			$userConferences = array($conference);
+			// EDIT added the current scheduled conference variable for registering purposes
+			$currentSchedConf =& $schedConfDao->getCurrentSchedConfs($conferenceId);
+			$currentSchedConf =& $currentSchedConf->next();
 			
 			$this->getRoleDataForConference($userId, $conferenceId, 0, $submissionsCount, $isValid);
 
@@ -138,6 +141,8 @@ class UserHandler extends Handler {
 		$templateMgr->assign('allConferences', $allConferences);
 		$templateMgr->assign('allSchedConfs', $allSchedConfs);
 		$templateMgr->assign('userSchedConfs', $schedConfsToDisplay);
+		// EDIT passing the variable to the Smarty
+		if($currentSchedConf) $templateMgr->assign('currentSchedConf', $currentSchedConf);
 		$templateMgr->assign('isValid', $isValid);
 		$templateMgr->assign('submissionsCount', $submissionsCount);
 		$templateMgr->assign('setupIncomplete', $setupIncomplete); 

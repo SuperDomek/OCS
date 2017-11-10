@@ -54,8 +54,9 @@ class CreateAccountHandler extends UserHandler {
 		} elseif ($conference != null) {
 
 			// We have the conference, but need to select a scheduled conference
+			// Edit we select only the last scheduled conference
 			$schedConfDao =& DAORegistry::getDAO('SchedConfDAO');
-			$schedConfs =& $schedConfDao->getEnabledSchedConfs($conference->getId());
+			$schedConfs =& $schedConfDao->getCurrentSchedConfs($conference->getId());
 
 			$templateMgr =& TemplateManager::getManager();
 			$templateMgr->assign('pageHierarchy', array(

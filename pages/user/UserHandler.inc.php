@@ -126,7 +126,8 @@ class UserHandler extends Handler {
 				unset($schedConf);
 			}
 
-			$schedConf =& Request::getSchedConf();
+			// EDIT Calling current schedConf from SchedConfDao instead of using the request context function
+			$schedConf =& $schedConfDao->getCurrentSchedConfs($conferenceId)->next();
 			if ($schedConf) {
 				import('schedConf.SchedConfAction');
 				$templateMgr->assign('allowRegAuthor', SchedConfAction::allowRegAuthor($schedConf));

@@ -102,6 +102,8 @@
 					<td align="right">[<a href="{url conference=$conferencePath schedConf=$schedConfPath  page="author" op="submit"}">{translate key="author.submit"}</a>]</td>
 				</tr>
 			{/if}
+			
+
 			{if $isValid.Reviewer.$conferenceId.$schedConfId}
 				{assign var="reviewerSubmissionsCount" value=$submissionsCount.Reviewer.$conferenceId.$schedConfId}
 				<tr>
@@ -146,43 +148,27 @@
 			</ul>
 			{/if}{* !empty($allSchedConfs[$conferenceId]) *}
 		{/foreach}
-		{url|assign:"sourceUrl" page="user"}
-		<a href="{url schedConf="2018" page="user" op="become" path="reviewer" source=$sourceUrl}">{translate key="user.noRoles.regReviewer"}</a>
 	{else}{* !$currentSchedConf *}
+		{url|assign:"sourceUrl" page="user"}
 		<p>{translate key="user.noRoles.noRolesForConference"}</p>
 		<ul class="plain">
 			<li>
 				&#187;
 				{if $allowRegAuthor}
-					{if $submissionsOpen}
-						<a href="{url page="author" op="submit"}">{translate key="user.noRoles.submitProposal"}</a>
-					{else}{* $submissionsOpen *}
-						{translate key="user.noRoles.submitProposalSubmissionsClosed"}
-					{/if}{* $submissionsOpen *}
+					<a href="{url schedConf=$currentSchedConf->getPath() page="user" op="become" path="author" source=$sourceUrl}">{translate key="user.noRoles.regAuthor" schedConfTitle=$currentSchedConf->getSchedConfTitle()|escape}</a>
 				{else}{* $allowRegAuthor *}
-					{translate key="user.noRoles.submitProposalRegClosed"}
+					{translate key="user.noRoles.regAuthorClosed"}
 				{/if}{* $allowRegAuthor *}
 			</li>
 			<li>
 				&#187;
 				{if $allowRegReviewer}
-					{url|assign:"userHomeUrl" page="user" op="index"}
-					<a href="{url op="become" path="reviewer" source=$userHomeUrl}">{translate key="user.noRoles.regReviewer"}</a>
+					<a href="{url schedConf=$currentSchedConf->getPath() page="user" op="become" path="reviewer" source=$sourceUrl}">{translate key="user.noRoles.regReviewer" schedConfTitle=$currentSchedConf->getSchedConfTitle()|escape}</a>
 				{else}{* $allowRegReviewer *}
 					{translate key="user.noRoles.regReviewerClosed"}
 				{/if}{* $allowRegReviewer *}
 			</li>
-			<li>
-				&#187;
-				{if $schedConfPaymentsEnabled}
-					<a href="{url page="schedConf" op="registration"}">{translate key="user.noRoles.register"}</a>
-				{else}{* $schedConfPaymentsEnabled *}
-					{translate key="user.noRoles.registerUnavailable"}
-				{/if}{* $schedConfPaymentsEnabled *}
-			</li>
 		</ul>
-				{url|assign:"sourceUrl" page="user"}
-		<a href="{url schedConf=$currentSchedConf->getPath() page="user" op="become" path="reviewer" source=$sourceUrl}">{translate key="user.noRoles.regReviewer"}</a>
 
 	{/if}{* !$currentSchedConf *}
 {/if}
@@ -195,7 +181,7 @@
 			<li>&#187; <a href="{url conference="index" page="user"}">{translate key="user.showAllConferences"}</a></li>
 		{/if}
 	{/if}
-	<li>&#187; <a href="{url page="user" op="profile"}">{translate key="user.editMyProfile"}</a></li>
+	<li>&#187; <a href="{url schedConf=$currentSchedConf->getPath() page="user" op="profile"}">{translate key="user.editMyProfile"}</a></li>
 	<li>&#187; <a href="{url page="user" op="changePassword"}">{translate key="user.changeMyPassword"}</a></li>
 	<li>&#187; <a href="{url page="login" op="signOut"}">{translate key="user.logOut"}</a></li>
 	{call_hook name="Templates::User::Index::MyAccount"}

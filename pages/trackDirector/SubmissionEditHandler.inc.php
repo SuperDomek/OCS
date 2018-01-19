@@ -222,14 +222,14 @@ class SubmissionEditHandler extends TrackDirectorHandler {
 				}
 				// EDIT Added else branch
 				else{
-					if($sessionType == 1) { // SessionType Research Artice
-						TrackDirectorAction::addReviewForm($submission, $reviewAssignment->getId(), 3);
+					if($sessionType == 3) { // SessionType Scientific Article
+						TrackDirectorAction::addReviewForm($submission, $reviewAssignment->getId(), 4);
 						// see table review_form_settings
 						header("Refresh:0"); // reload page
 						exit();	// stop executing code so page reloads instanteously
 					}
-					elseif($sessionType == 2){ // SessionType Research Artice
-						TrackDirectorAction::addReviewForm($submission, $reviewAssignment->getId(), 2);
+					elseif($sessionType == 4){ // SessionType Review Study
+						TrackDirectorAction::addReviewForm($submission, $reviewAssignment->getId(), 5);
 						header("Refresh:0");
 						exit();
 					}

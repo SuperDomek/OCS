@@ -22,12 +22,13 @@
 {if !$currentConference}<h3>{translate key="user.myConferences"}</h3>{/if}
 
 {foreach from=$userConferences item=conference}
-{assign var="hasRole" value=1}
+{*assign var="hasRole" value=1*}
 {assign var="conferenceId" value=$conference->getId()}
 {assign var="conferencePath" value=$conference->getPath()}
 
 <div id="conference">
   		{if $isValid.ConferenceManager.$conferenceId.0}
+			{assign var="hasRole" value=1}
 <h4><a href="{url conference=$conference->getPath() page="user"}">{$conference->getConferenceTitle()|escape}</a></h4>
 	{* Display conference roles *}
 
@@ -51,6 +52,7 @@
 
 		<table width="100%" class="info">
 			{if $isValid.Director.$conferenceId.$schedConfId}
+			{assign var="hasRole" value=1}
 				<tr>
 					{assign var="directorSubmissionsCount" value=$submissionsCount.Director.$conferenceId.$schedConfId}
 					<td>&#187; <a href="{url conference=$conferencePath schedConf=$schedConfPath  schedConf=$schedConfPath page="director"}">{translate key="user.role.director"}</a></td>
@@ -69,6 +71,7 @@
 				</tr>
 			{/if}
 			{if $isValid.TrackDirector.$conferenceId.$schedConfId}
+			{assign var="hasRole" value=1}
 				{assign var="trackDirectorSubmissionsCount" value=$submissionsCount.TrackDirector.$conferenceId.$schedConfId}
 				<tr>
 					<td>&#187; <a href="{url conference=$conferencePath schedConf=$schedConfPath  page="trackDirector"}">{translate key="user.role.trackDirector"}</a></td>
@@ -83,6 +86,7 @@
 				</tr>
 			{/if}
 			{if $isValid.Author.$conferenceId.$schedConfId || $isValid.Reviewer.$conferenceId.$schedConfId}
+			{assign var="hasRole" value=1}
 				<tr><td class="separator" width="100%" colspan="5">&nbsp;</td></tr>
 			{/if}
 			{if $isValid.Author.$conferenceId.$schedConfId}
@@ -98,6 +102,8 @@
 					<td align="right">[<a href="{url conference=$conferencePath schedConf=$schedConfPath  page="author" op="submit"}">{translate key="author.submit"}</a>]</td>
 				</tr>
 			{/if}
+			
+
 			{if $isValid.Reviewer.$conferenceId.$schedConfId}
 				{assign var="reviewerSubmissionsCount" value=$submissionsCount.Reviewer.$conferenceId.$schedConfId}
 				<tr>
@@ -132,7 +138,7 @@
 {if !$hasRole}
 	{if !$currentSchedConf}
 		<p>{translate key="user.noRoles.chooseConference"}</p>
-		{foreach from=$allConferences item=thisConference key=conferenceId}
+		{foreach from=$allSchedConfs item=thisConference key=conferenceId}
 			<h4>{$thisConference->getConferenceTitle()|escape}</h4>
 			{if !empty($allSchedConfs[$conferenceId])}
 			<ul class="plain">
@@ -143,38 +149,27 @@
 			{/if}{* !empty($allSchedConfs[$conferenceId]) *}
 		{/foreach}
 	{else}{* !$currentSchedConf *}
+		{url|assign:"sourceUrl" page="user"}
 		<p>{translate key="user.noRoles.noRolesForConference"}</p>
 		<ul class="plain">
 			<li>
 				&#187;
 				{if $allowRegAuthor}
-					{if $submissionsOpen}
-						<a href="{url page="author" op="submit"}">{translate key="user.noRoles.submitProposal"}</a>
-					{else}{* $submissionsOpen *}
-						{translate key="user.noRoles.submitProposalSubmissionsClosed"}
-					{/if}{* $submissionsOpen *}
+					<a href="{url schedConf=$currentSchedConf->getPath() page="user" op="become" path="author" source=$sourceUrl}">{translate key="user.noRoles.regAuthor" schedConfTitle=$currentSchedConf->getSchedConfTitle()|escape}</a>
 				{else}{* $allowRegAuthor *}
-					{translate key="user.noRoles.submitProposalRegClosed"}
+					{translate key="user.noRoles.regAuthorClosed"}
 				{/if}{* $allowRegAuthor *}
 			</li>
 			<li>
 				&#187;
 				{if $allowRegReviewer}
-					{url|assign:"userHomeUrl" page="user" op="index"}
-					<a href="{url op="become" path="reviewer" source=$userHomeUrl}">{translate key="user.noRoles.regReviewer"}</a>
+					<a href="{url schedConf=$currentSchedConf->getPath() page="user" op="become" path="reviewer" source=$sourceUrl}">{translate key="user.noRoles.regReviewer" schedConfTitle=$currentSchedConf->getSchedConfTitle()|escape}</a>
 				{else}{* $allowRegReviewer *}
 					{translate key="user.noRoles.regReviewerClosed"}
 				{/if}{* $allowRegReviewer *}
 			</li>
-			<li>
-				&#187;
-				{if $schedConfPaymentsEnabled}
-					<a href="{url page="schedConf" op="registration"}">{translate key="user.noRoles.register"}</a>
-				{else}{* $schedConfPaymentsEnabled *}
-					{translate key="user.noRoles.registerUnavailable"}
-				{/if}{* $schedConfPaymentsEnabled *}
-			</li>
 		</ul>
+
 	{/if}{* !$currentSchedConf *}
 {/if}
 
@@ -186,7 +181,7 @@
 			<li>&#187; <a href="{url conference="index" page="user"}">{translate key="user.showAllConferences"}</a></li>
 		{/if}
 	{/if}
-	<li>&#187; <a href="{url page="user" op="profile"}">{translate key="user.editMyProfile"}</a></li>
+	<li>&#187; <a href="{url schedConf=$currentSchedConf->getPath() page="user" op="profile"}">{translate key="user.editMyProfile"}</a></li>
 	<li>&#187; <a href="{url page="user" op="changePassword"}">{translate key="user.changeMyPassword"}</a></li>
 	<li>&#187; <a href="{url page="login" op="signOut"}">{translate key="user.logOut"}</a></li>
 	{call_hook name="Templates::User::Index::MyAccount"}

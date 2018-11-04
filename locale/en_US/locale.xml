@@ -315,7 +315,9 @@
 	<message key="user.noRoles.submitProposal">Submit a Proposal</message>
 	<message key="user.noRoles.submitProposalRegClosed">Submit a Proposal: Author registration is currently closed.</message>
 	<message key="user.noRoles.submitProposalSubmissionsClosed">Submit a Proposal: Submissions are currently closed.</message>
-	<message key="user.noRoles.regReviewer">Register as a Conference Reviewer</message>
+	<message key="user.noRoles.regAuthor">Register as an author for the conference {$schedConfTitle}</message>
+	<message key="user.noRoles.regAuthorClosed">Registration of authors for the conference {$schedConfTitle} is currently closed</message>
+	<message key="user.noRoles.regReviewer">Register as a Conference Reviewer {$schedConfTitle}</message>
 	<message key="user.noRoles.regReviewerClosed">Register as a Conference Reviewer: Reviewer registration is currently closed.</message>
 	<message key="user.noRoles.register">Register to attend the conference</message>
 	<message key="user.noRoles.registerUnavailable">Register to attend the conference: Registration is not currently accepted.</message>

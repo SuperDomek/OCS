@@ -107,10 +107,14 @@ class UserHandler extends Handler {
 		} else {  // Currently within a conference's context
 			$conferenceId = $conference->getId();
 			$userConferences = array($conference);
+			// EDIT added the current scheduled conference variable for registering purposes
+			$currentSchedConf =& $schedConfDao->getCurrentSchedConfs($conferenceId);
+			$currentSchedConf =& $currentSchedConf->next();
 			
 			$this->getRoleDataForConference($userId, $conferenceId, 0, $submissionsCount, $isValid);
 
-			$schedConfs =& $schedConfDao->getSchedConfsByConferenceId($conferenceId);
+			// EDIT changed function to get only the most recent scheduled conference
+			$schedConfs =& $schedConfDao->getCurrentSchedConfs($conferenceId);
 			while($schedConf =& $schedConfs->next()) {
 				$schedConfId = $schedConf->getId();
 				$schedConfRoles =& $roleDao->getRolesByUserId($userId, $conferenceId, $schedConfId);
@@ -122,7 +126,8 @@ class UserHandler extends Handler {
 				unset($schedConf);
 			}
 
-			$schedConf =& Request::getSchedConf();
+			// EDIT Calling current schedConf from SchedConfDao instead of using the request context function
+			$schedConf =& $schedConfDao->getCurrentSchedConfs($conferenceId)->next();
 			if ($schedConf) {
 				import('schedConf.SchedConfAction');
 				$templateMgr->assign('allowRegAuthor', SchedConfAction::allowRegAuthor($schedConf));
@@ -137,6 +142,8 @@ class UserHandler extends Handler {
 		$templateMgr->assign('allConferences', $allConferences);
 		$templateMgr->assign('allSchedConfs', $allSchedConfs);
 		$templateMgr->assign('userSchedConfs', $schedConfsToDisplay);
+		// EDIT passing the variable to the Smarty
+		if($currentSchedConf) $templateMgr->assign('currentSchedConf', $currentSchedConf);
 		$templateMgr->assign('isValid', $isValid);
 		$templateMgr->assign('submissionsCount', $submissionsCount);
 		$templateMgr->assign('setupIncomplete', $setupIncomplete); 

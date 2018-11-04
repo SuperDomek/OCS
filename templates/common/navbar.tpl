@@ -11,18 +11,19 @@
  {$currentYear}
 <div id="navbar">
 	<ul class="menu">
-		<li><a href="{url context=$homeContext op="index"}">{translate key="navigation.home"}</a></li>
-    <!-- Hardcoded redirect to 2017 conference -->
-		<li><a href="{url schedConf="2017" page="about"}">{translate key="navigation.about"}</a></li>
+		<li><a href="{url schedConf="index" page="user"}">{translate key="navigation.home"}</a></li>
+    	<li><a href="{url page="about"}">{translate key="navigation.about"}</a></li>
 		{if $isUserLoggedIn}
       <!--<li><a href="{url conference="index" page="user"}">{translate key="navigation.userHome"}</a></li>-->
 
 			<li><a href="{url schedConf="index" page="user"}">{translate key="navigation.userHome"}</a></li>
+			<li><a href="https://tt.pef.czu.cz" target="_blank">{translate key="navigation.conferenceWeb"}</a></li>
 		{else}
 			<!-- EDIT Slim interface
 			<li><a href="{url page="login"}">{translate key="navigation.login"}</a></li>
 			-->
 			<li><a href="{url page="user" op="account"}">{translate key="navigation.account"}</a></li>
+			<li><a href="https://tt.pef.czu.cz" target="_blank">{translate key="navigation.conferenceWeb"}</a></li>
 		{/if}{* $isUserLoggedIn *}
 {php}
 /*$everything = get_defined_vars();

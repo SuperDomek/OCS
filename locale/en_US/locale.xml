@@ -123,6 +123,7 @@
 	<!-- EDIT Slim interface -->
 	<message key="navigation.account">Register</message>
 	<!-- END EDIT -->
+	<message key="navigation.conferenceWeb">Conference Web</message>
 	<message key="navigation.archive">Archive</message>
 	<message key="navigation.current">Current Conferences</message>
 	<message key="navigation.otherConferences">Other Conferences</message>

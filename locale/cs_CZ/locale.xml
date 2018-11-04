@@ -126,6 +126,7 @@
 	<!-- EDIT Slim interface -->
 	<message key="navigation.account">Registrovat</message>
 	<!-- END EDIT -->
+	<message key="navigation.conferenceWeb">Web konference</message>
 	<message key="navigation.archive">Archiv</message>
 	<message key="navigation.current">Aktuální konference</message>
 	<message key="navigation.otherConferences">Ostatní konference</message>

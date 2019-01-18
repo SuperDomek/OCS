@@ -585,12 +585,13 @@ class ReviewAssignment extends DataObject {
 		// Edit Add and hide recommendation codes in reviewer form
 		static $reviewerRecommendationOptions = array(
 			'' => 'common.chooseOne',
+			SUBMISSION_REVIEWER_RECOMMENDATION_AWARD => 'reviewer.paper.decision.award',
 			SUBMISSION_REVIEWER_RECOMMENDATION_ACCEPT => 'reviewer.paper.decision.accept',
 			//SUBMISSION_REVIEWER_RECOMMENDATION_PENDING_REVISIONS => 'reviewer.paper.decision.pendingRevisions',
 			//SUBMISSION_REVIEWER_RECOMMENDATION_RESUBMIT_ELSEWHERE => 'reviewer.paper.decision.resubmitElsewhere',
-			SUBMISSION_REVIEWER_RECOMMENDATION_AWARD => 'reviewer.paper.decision.award',
-			SUBMISSION_REVIEWER_RECOMMENDATION_PUNISH => 'reviewer.paper.decision.punish',
 			SUBMISSION_REVIEWER_RECOMMENDATION_DECLINE => 'reviewer.paper.decision.decline',
+			SUBMISSION_REVIEWER_RECOMMENDATION_PUNISH => 'reviewer.paper.decision.punish'
+			
 			//SUBMISSION_REVIEWER_RECOMMENDATION_SEE_COMMENTS => 'reviewer.paper.decision.seeComments'
 		);
 		// End Edit

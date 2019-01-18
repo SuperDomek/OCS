@@ -93,7 +93,7 @@
 	<message key="director.paper.decision.invitePresentation">Požádat o prezentaci</message>
 	<message key="director.paper.decision.accept">Přijmout příspěvek</message>
 	<message key="director.paper.decision.pendingRevisions">Jsou vyžadovány úpravy</message>
-	<message key="director.paper.decision.decline">Odmítnout příspěvek</message>
+	<message key="director.paper.decision.decline">Zamítnout příspěvek</message>
 	<message key="director.paper.decision.award">Přijmout příspěvek a ocenit</message>
 	<message key="director.paper.decision.punish">Zamítnout se sankcí</message>
 	<message key="director.paper.moveToLayout">Přesunout do tiskového rozvržení</message>

@@ -516,7 +516,7 @@ Aktivní odkazuje na počet oponentů, kteří ještě zvažují přijetí.]]></
 	<message key="reviewer.paper.decision.accept">Přijmout příspěvek</message>
 	<message key="reviewer.paper.decision.pendingRevisions">Požadavek na opravy</message>
 	<message key="reviewer.paper.decision.resubmitElsewhere">Podat jinam</message>
-	<message key="reviewer.paper.decision.decline">Odmítnout příspěvek</message>
+	<message key="reviewer.paper.decision.decline">Zamítnout příspěvek</message>
 	<!-- Edit Add reviewer options -->
 	<message key="reviewer.paper.decision.award">Přijmout a ocenit</message>
 	<message key="reviewer.paper.decision.punish">Zamítnout se sankcí</message>

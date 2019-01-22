@@ -128,6 +128,7 @@ switch ($op) {
 	case 'movePaper':
 	case 'notifyUsers':
 	case 'instructions':
+	case 'reviews':
 		define('HANDLER_CLASS', 'DirectorHandler');
 		import('pages.director.DirectorHandler');
 }

@@ -218,7 +218,7 @@ class DirectorHandler extends TrackDirectorHandler {
 		$templateMgr->assign('helpTopicId', $helpTopicId);
 		$templateMgr->assign('sort', $sort);
 		$templateMgr->assign('sortDirection', $sortDirection);
-		$templateMgr->display('director/submissions.tpl');
+		$templateMgr->display('director/reviews.tpl');
 	}
 
 	/**
@@ -504,6 +504,154 @@ class DirectorHandler extends TrackDirectorHandler {
 		}
 	}
 
+	/**
+	 * Allows directors to write emails to users associated with the conference.
+	 */
+	function reviews($args) {
+		$this->validate();
+		$this->setupTemplate(DIRECTOR_TRACK_SUBMISSIONS);
+
+		$directorSubmissionDao =& DAORegistry::getDAO('DirectorSubmissionDAO');
+		$trackDao =& DAORegistry::getDAO('TrackDAO');
+
+
+		$conference =& Request::getConference();
+		$conferenceId = $conference->getId();
+		$schedConf =& Request::getSchedConf();
+		$schedConfId = $schedConf->getId();
+		
+
+		$page = isset($args[0]) ? $args[0] : '';
+		$tracks =& $trackDao->getTrackTitles($schedConfId);
+
+		$filterDirectorOptions = array(
+			FILTER_DIRECTOR_ALL => AppLocale::Translate('director.allDirectors'),
+			FILTER_DIRECTOR_ME => AppLocale::Translate('director.me')
+		);
+
+		$filterTrackOptions = array(
+			FILTER_TRACK_ALL => AppLocale::Translate('director.allTracks')
+		) + $tracks;
+
+		$functionName = 'getDirectorSubmissionsInReview';
+
+		$user =& Request::getUser();
+
+		// Get the user's search conditions, if any
+		$searchField = Request::getUserVar('searchField');
+		$searchMatch = Request::getUserVar('searchMatch');
+		$search = Request::getUserVar('search');
+
+		$sort = Request::getUserVar('sort');
+		$sortDirection = Request::getUserVar('sortDirection');
+
+		$filterDirector = Request::getUserVar('filterDirector');
+		if ($filterDirector != '' && array_key_exists($filterDirector, $filterDirectorOptions)) {
+			$user->updateSetting('filterDirector', $filterDirector, 'int', $schedConfId);
+		} else {
+			$filterDirector = $user->getSetting('filterDirector', $schedConfId);
+			if ($filterDirector == null) {
+				$filterDirector = FILTER_DIRECTOR_ALL;
+				$user->updateSetting('filterDirector', $filterDirector, 'int', $schedConfId);
+			}	
+		}
+
+		if ($filterDirector == FILTER_DIRECTOR_ME) {
+			$directorId = $user->getId();
+		} else {
+			$directorId = FILTER_DIRECTOR_ALL;
+		}
+
+		$filterTrack = Request::getUserVar('filterTrack');
+		if ($filterTrack != '' && array_key_exists($filterTrack, $filterTrackOptions)) {
+			$user->updateSetting('filterTrack', $filterTrack, 'int', $schedConfId);
+		} else {
+			$filterTrack = $user->getSetting('filterTrack', $schedConfId);
+			if ($filterTrack == null) {
+				$filterTrack = FILTER_TRACK_ALL;
+				$user->updateSetting('filterTrack', $filterTrack, 'int', $schedConfId);
+			}	
+		}
+
+		$rangeInfo =& Handler::getRangeInfo('submissions', array($functionName, (string) $searchField, (string) $searchMatch, (string) $search));
+		while (true) {
+			$submissions =& $directorSubmissionDao->$functionName(
+				$schedConfId,
+				null,
+				$directorId,
+				$searchField,
+				$searchMatch,
+				$search,
+				null,
+				null,
+				null,
+				$rangeInfo,
+				$sort,
+				$sortDirection
+			);
+			if ($submissions->isInBounds()) break;
+			unset($rangeInfo);
+			$rangeInfo =& $submissions->getLastPageRangeInfo();
+			unset($submissions);
+		}
+
+		
+		if ($sort == 'status') {
+			// Sort all submissions by status, which is too complex to do in the DB
+			$submissionsArray = $submissions->toArray();
+			$compare = create_function('$s1, $s2', 'return strcmp($s1->getSubmissionStatus(), $s2->getSubmissionStatus());');
+			usort ($submissionsArray, $compare);
+			if($sortDirection == 'DESC') {
+				$submissionsArray = array_reverse($submissionsArray);
+			}
+			// Convert submission array back to an ItemIterator class
+			import('core.ArrayItemIterator');
+			$submissions =& ArrayItemIterator::fromRangeInfo($submissionsArray, $rangeInfo);
+		}
+
+		$templateMgr =& TemplateManager::getManager();
+		$templateMgr->assign('director', $user->getFullName());
+		$templateMgr->assign('directorOptions', $filterDirectorOptions);
+		$templateMgr->assign('trackOptions', $filterTrackOptions);
+		$templateMgr->assign_by_ref('submissions', $submissions);
+		$templateMgr->assign('filterDirector', $filterDirector);
+		$templateMgr->assign('filterTrack', $filterTrack);
+		$templateMgr->assign('yearOffsetFuture', SCHED_CONF_DATE_YEAR_OFFSET_FUTURE);
+		$templateMgr->assign('durationOptions', TrackDirectorHandler::getDurationOptions());
+
+		$sessionTypesArray = array();
+		$paperTypeDao = DAORegistry::getDAO('PaperTypeDAO');
+		$sessionTypes = $paperTypeDao->getPaperTypes($schedConfId);
+		while ($sessionType = $sessionTypes->next()) {
+			$sessionTypesArray[$sessionType->getId()] = $sessionType;
+		}
+		$templateMgr->assign('sessionTypes', $sessionTypesArray);
+
+		// Set search parameters
+		$duplicateParameters = array(
+			'searchField', 'searchMatch', 'search'
+		);
+		foreach ($duplicateParameters as $param)
+			$templateMgr->assign($param, Request::getUserVar($param));
+
+		$templateMgr->assign('reviewType', Array(
+			REVIEW_STAGE_ABSTRACT => __('submission.abstract'),
+			REVIEW_STAGE_PRESENTATION => __('submission.paper')
+		));
+
+		$templateMgr->assign('fieldOptions', Array(
+			SUBMISSION_FIELD_TITLE => 'paper.title',
+			SUBMISSION_FIELD_AUTHOR => 'user.role.author',
+			SUBMISSION_FIELD_DIRECTOR => 'user.role.director',
+			SUBMISSION_FIELD_REVIEWER => 'user.role.reviewer'
+		));
+
+		$templateMgr->assign('helpTopicId', $helpTopicId);
+		$templateMgr->assign('sort', $sort);
+		$templateMgr->assign('sortDirection', $sortDirection);
+		$templateMgr->display('director/reviews.tpl');
+
+	}
 	/**
 	 * Setup common template variables.
 	 * @param $level int set to 0 if caller is at the same level as this handler in the hierarchy; otherwise the number of levels below this handler

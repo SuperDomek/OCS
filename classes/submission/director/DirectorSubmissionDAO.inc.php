@@ -333,7 +333,7 @@ class DirectorSubmissionDAO extends DAO {
 	}
 
 	/**
-	 * Get all submissions in review for a scheduled conference.
+	 * Get all submissions in review and not accepted for a scheduled conference.
 	 * @param $schedConfId int
 	 * @param $trackId int
 	 * @param $directorId int
@@ -357,6 +357,33 @@ class DirectorSubmissionDAO extends DAO {
 		$returner = new DAOResultFactory($result, $this, '_returnDirectorSubmissionFromRow');
 		return $returner;
 	}
+
+/**
+	 * Get ALL submissions that have a review for a scheduled conference.
+	 * @param $schedConfId int
+	 * @param $trackId int
+	 * @param $directorId int
+	 * @param $searchField int Symbolic SUBMISSION_FIELD_... identifier
+	 * @param $searchMatch string "is" or "contains" or "startsWith"
+	 * @param $search String to look in $searchField for
+	 * @param $dateField int Symbolic SUBMISSION_FIELD_DATE_... identifier
+	 * @param $dateFrom String date to search from
+	 * @param $dateTo String date to search to
+	 * @param $rangeInfo object
+	 * @return array DirectorSubmission
+	 */
+	function &getAllDirectorSubmissionsWithReview($schedConfId, $trackId, $directorId, $searchField = null, $searchMatch = null, $search = null, $dateField = null, $dateFrom = null, $dateTo = null, $rangeInfo = null, $sortBy = null, $sortDirection = SORT_DIRECTION_ASC) {
+		$result =& $this->_getUnfilteredDirectorSubmissions(
+			$schedConfId, $trackId, $directorId,
+			$searchField, $searchMatch, $search,
+			$dateField, $dateFrom, $dateTo,
+			'ea.edit_id IS NOT NULL AND (ra.paper_id IS NOT NULL AND ra.cancelled = 0)',
+			$rangeInfo, $sortBy, $sortDirection
+		);
+		$returner = new DAOResultFactory($result, $this, '_returnDirectorSubmissionFromRow');
+		return $returner;
+	}
+
 
 	/**
 	 * Get all submissions accepted for a scheduled conference.

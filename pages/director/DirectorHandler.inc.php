@@ -20,6 +20,7 @@ import('trackDirector.TrackDirectorHandler');
 
 define('DIRECTOR_TRACK_HOME', 0);
 define('DIRECTOR_TRACK_SUBMISSIONS', 1);
+define('DIRECTOR_REVIEWS', 2);
 
 // Filter director
 define('FILTER_DIRECTOR_ALL', 0);
@@ -218,7 +219,7 @@ class DirectorHandler extends TrackDirectorHandler {
 		$templateMgr->assign('helpTopicId', $helpTopicId);
 		$templateMgr->assign('sort', $sort);
 		$templateMgr->assign('sortDirection', $sortDirection);
-		$templateMgr->display('director/reviews.tpl');
+		$templateMgr->display('director/submissions.tpl');
 	}
 
 	/**
@@ -509,7 +510,7 @@ class DirectorHandler extends TrackDirectorHandler {
 	 */
 	function reviews($args) {
 		$this->validate();
-		$this->setupTemplate(DIRECTOR_TRACK_SUBMISSIONS);
+		$this->setupTemplate(DIRECTOR_REVIEWS);
 
 		$directorSubmissionDao =& DAORegistry::getDAO('DirectorSubmissionDAO');
 		$trackDao =& DAORegistry::getDAO('TrackDAO');
@@ -518,8 +519,7 @@ class DirectorHandler extends TrackDirectorHandler {
 		$conference =& Request::getConference();
 		$conferenceId = $conference->getId();
 		$schedConf =& Request::getSchedConf();
-		$schedConfId = $schedConf->getId();
-		
+		$schedConfId = $schedConf->getId();	
 
 		$page = isset($args[0]) ? $args[0] : '';
 		$tracks =& $trackDao->getTrackTitles($schedConfId);
@@ -533,7 +533,8 @@ class DirectorHandler extends TrackDirectorHandler {
 			FILTER_TRACK_ALL => AppLocale::Translate('director.allTracks')
 		) + $tracks;
 
-		$functionName = 'getDirectorSubmissionsInReview';
+		$page = 'submissionsInReview';
+		$functionName = 'getAllDirectorSubmissionsWithReview';
 
 		$user =& Request::getUser();
 
@@ -607,9 +608,14 @@ class DirectorHandler extends TrackDirectorHandler {
 			// Convert submission array back to an ItemIterator class
 			import('core.ArrayItemIterator');
 			$submissions =& ArrayItemIterator::fromRangeInfo($submissionsArray, $rangeInfo);
+			unset($submissionsArray);
 		}
 
+		// delete submissions without review assigned
+
+
 		$templateMgr =& TemplateManager::getManager();
+		$templateMgr->assign('pageToDisplay', $page);
 		$templateMgr->assign('director', $user->getFullName());
 		$templateMgr->assign('directorOptions', $filterDirectorOptions);
 		$templateMgr->assign('trackOptions', $filterTrackOptions);
@@ -674,6 +680,9 @@ class DirectorHandler extends TrackDirectorHandler {
 		if ($level==DIRECTOR_TRACK_SUBMISSIONS) {
 			$pageHierarchy[] = array(Request::url(null, null, 'director'), 'user.role.director');
 			$pageHierarchy[] = array(Request::url(null, null, 'director', 'submissions'), 'paper.submissions');
+		}
+		elseif ($level == DIRECTOR_REVIEWS){
+			$pageHierarchy[] = array(Request::url(null, null, 'director'), 'user.role.director');
 		}
 
 		import('submission.trackDirector.TrackDirectorAction');

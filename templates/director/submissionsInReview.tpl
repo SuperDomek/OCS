@@ -8,6 +8,7 @@
  *
  * $Id$
  *}
+
 <div id="submissions">
 <table width="100%" class="listing">
 	<tr>

@@ -17,6 +17,7 @@
 
 
 import('trackDirector.TrackDirectorHandler');
+import('submission.reviewAssignment.reviewAssignment');
 
 define('DIRECTOR_TRACK_HOME', 0);
 define('DIRECTOR_TRACK_SUBMISSIONS', 1);
@@ -536,6 +537,10 @@ class DirectorHandler extends TrackDirectorHandler {
 		$page = 'submissionsInReview';
 		$functionName = 'getAllDirectorSubmissionsWithReview';
 
+		$reviewStatusOptions = array();
+		$reviewAssignment = new ReviewAssignment();
+		$reviewStatusOptions = $reviewAssignment->getReviewStatusOptions();
+
 		$user =& Request::getUser();
 
 		// Get the user's search conditions, if any
@@ -611,9 +616,6 @@ class DirectorHandler extends TrackDirectorHandler {
 			unset($submissionsArray);
 		}
 
-		// delete submissions without review assigned
-
-
 		$templateMgr =& TemplateManager::getManager();
 		$templateMgr->assign('pageToDisplay', $page);
 		$templateMgr->assign('director', $user->getFullName());
@@ -624,6 +626,7 @@ class DirectorHandler extends TrackDirectorHandler {
 		$templateMgr->assign('filterTrack', $filterTrack);
 		$templateMgr->assign('yearOffsetFuture', SCHED_CONF_DATE_YEAR_OFFSET_FUTURE);
 		$templateMgr->assign('durationOptions', TrackDirectorHandler::getDurationOptions());
+		$templateMgr->assign('reviewStatusOptions', $reviewStatusOptions);
 
 		$sessionTypesArray = array();
 		$paperTypeDao = DAORegistry::getDAO('PaperTypeDAO');

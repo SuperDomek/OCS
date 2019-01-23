@@ -15,6 +15,9 @@
 
 // $Id$
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 import('trackDirector.TrackDirectorHandler');
 import('submission.reviewAssignment.reviewAssignment');

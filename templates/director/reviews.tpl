@@ -33,7 +33,7 @@ function sortSearch(heading, direction) {
 </ul>
 </form>
 
-<form method="post" name="submit" action="{url op="submissions" path=$pageToDisplay}">
+<form method="post" name="submit" action="{url op="reviews"}">
 	<input type="hidden" name="sort" value="id"/>
 	<input type="hidden" name="sortDirection" value="ASC"/>
 	<select name="searchField" size="1" class="selectMenu">

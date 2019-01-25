@@ -604,7 +604,8 @@ class DirectorHandler extends TrackDirectorHandler {
 			unset($submissions);
 		}
 
-		if($export == 'XLSX'){
+		if($export == 'XLXS'){
+			/*
 			// Creating spreadsheet
 			$spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
 			// Setting up metadata
@@ -636,10 +637,10 @@ class DirectorHandler extends TrackDirectorHandler {
 
 			// Clearing Workbook
 			$spreadsheet->disconnectWorksheets();
-			unset($spreadsheet);
+			unset($spreadsheet);*/
 		}
 		else if($export == 'DOCX'){
-
+			$phpWord = new \PhpOffice\PhpWord\PhpWord();
 		}
 
 		if ($sort == 'status') {
@@ -968,7 +969,9 @@ class DirectorHandler extends TrackDirectorHandler {
 				->getColumnDimension('H')
 				->setWidth(15);
 		}
+		// Odloženo, nutné vyřešit generování pro různé recenzní formuláře
 		else if ($page == "reviews"){
+			/*
 			// Set up Header
 			$column = 'A';
 			$row = 1;
@@ -1048,7 +1051,7 @@ class DirectorHandler extends TrackDirectorHandler {
 				->setWidth(8);
 			$spreadsheet->getActiveSheet()
 				->getColumnDimension('H')
-				->setWidth(15);
+				->setWidth(15);*/
 		}
 		else{
 			$p->show("Error: no export page selected.");

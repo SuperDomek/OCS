@@ -33,6 +33,7 @@ function sortSearch(heading, direction) {
 </ul>
 </form>
 
+<div style="float:left;">
 <form method="post" name="submit" action="{url op="reviews"}">
 	<input type="hidden" name="sort" value="id"/>
 	<input type="hidden" name="sortDirection" value="ASC"/>
@@ -48,6 +49,12 @@ function sortSearch(heading, direction) {
 	<br/>
 	<input type="submit" value="{translate key="common.search"}" class="button" />
 </form>
+
+</div>
+<div style="position:relative;float:right;">
+<a href="{url op="reviews" path=$pageToDisplay|to_array:"DOCX"}"><img src="{$baseUrl}/lib/pkp/templates/images/structure/word.png" alt="Export to MS Word" width="64px"/></a>
+<a href="javascript:window.print()"><img src="{$baseUrl}/lib/pkp/templates/images/structure/pdf.png" alt="Download PDF" width="64px"/></a>
+</div>
 &nbsp;
 
 

@@ -184,7 +184,7 @@ class SubmissionEditHandler extends TrackDirectorHandler {
 				$notifyReviewerLogs[$reviewAssignment->getId()] = array();
 			}
 		}
-
+		
 		// Parse the list of email logs and populate the array.
 		import('paper.log.PaperLog');
 		$emailLogEntries =& PaperLog::getEmailLogEntries($paperId);
@@ -228,7 +228,7 @@ class SubmissionEditHandler extends TrackDirectorHandler {
 						header("Refresh:0"); // reload page
 						exit();	// stop executing code so page reloads instanteously
 					}
-					elseif($sessionType == 6){ // SessionType Research Article
+					elseif($sessionType == 6){ // SessionType Review Study
 						TrackDirectorAction::addReviewForm($submission, $reviewAssignment->getId(), 7);
 						header("Refresh:0");
 						exit();

@@ -38,6 +38,7 @@
 	<message key="director.notifyUsers.allRegistrants">All registrants ({$count} users)</message>
 	<message key="director.navigation.management">Management</message>
 	<message key="director.reviews">Reviews</message>
+	<message key="director.review.forms">Review forms</message>
 	<message key="director.paper.sendToArchive">Archive this submission</message>
 	<message key="director.paper.designateReviewVersion">Designate the original file as the Review Version</message>
 	<message key="director.paper.uploadReviewVersion">Upload a revised file to serve as the Review Version</message>

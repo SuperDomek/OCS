@@ -40,6 +40,7 @@
 	<message key="director.notifyUsers.allRegistrants">Všichni registrovaní ({$count} uživatelů)</message>
 	<message key="director.navigation.management">Management</message>
 	<message key="director.reviews">Recenze</message>
+	<message key="director.review.forms">Recenzní formuláře</message>
 	<message key="director.paper.sendToArchive">Archivovat tento příspěvek</message>
 	<message key="director.paper.designateReviewVersion">Označit původní soubor jako verzi k oponování</message>
 	<message key="director.paper.uploadReviewVersion">Nahrát upravený soubor, který bude sloužit jako verze k oponování</message>

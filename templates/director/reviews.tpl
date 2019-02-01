@@ -52,7 +52,7 @@ function sortSearch(heading, direction) {
 
 </div>
 <div style="position:relative;float:right;">
-<a href="{url op="reviews" path=$pageToDisplay|to_array:"DOCX"}"><img src="{$baseUrl}/lib/pkp/templates/images/structure/word.png" alt="Export to MS Word" width="64px"/></a>
+<a href="{url op="reviews" path="DOCX"}"><img src="{$baseUrl}/lib/pkp/templates/images/structure/word.png" alt="Export to MS Word" width="64px"/></a>
 <a href="javascript:window.print()"><img src="{$baseUrl}/lib/pkp/templates/images/structure/pdf.png" alt="Download PDF" width="64px"/></a>
 </div>
 &nbsp;

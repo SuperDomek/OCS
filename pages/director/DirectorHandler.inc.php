@@ -645,52 +645,10 @@ class DirectorHandler extends TrackDirectorHandler {
 			// Creating the new document...
 			$phpWord = new \PhpOffice\PhpWord\PhpWord();
 
-			/* Note: any element you append to a document must reside inside of a Section. */
+			// odstranění režimu kompatibility
+			$phpWord->getCompatibility()->setOoxmlVersion(15);			
 
-			// Adding an empty Section to the document...
-			$section = $phpWord->addSection();
-			// Adding Text element to the Section having font styled by default...
-			$section->addText(
-				'"Learn from yesterday, live for today, hope for tomorrow. '
-					. 'The important thing is not to stop questioning." '
-					. '(Albert Einstein)'
-			);
-
-			/*
-			* Note: it's possible to customize font style of the Text element you add in three ways:
-			* - inline;
-			* - using named font style (new font style object will be implicitly created);
-			* - using explicitly created font style object.
-			*/
-
-			// Adding Text element with font customized inline...
-			$section->addText(
-				'"Great achievement is usually born of great sacrifice, '
-					. 'and is never the result of selfishness." '
-					. '(Napoleon Hill)',
-				array('name' => 'Tahoma', 'size' => 10)
-			);
-
-			// Adding Text element with font customized using named font style...
-			$fontStyleName = 'oneUserDefinedStyle';
-			$phpWord->addFontStyle(
-				$fontStyleName,
-				array('name' => 'Tahoma', 'size' => 10, 'color' => '1B2232', 'bold' => true)
-			);
-			$section->addText(
-				'"The greatest accomplishment is not in never falling, '
-					. 'but in rising again after you fall." '
-					. '(Vince Lombardi)',
-				$fontStyleName
-			);
-
-			// Adding Text element with font customized using explicitly created font style object...
-			$fontStyle = new \PhpOffice\PhpWord\Style\Font();
-			$fontStyle->setBold(true);
-			$fontStyle->setName('Tahoma');
-			$fontStyle->setSize(13);
-			$myTextElement = $section->addText('"Believe you can and you\'re halfway there." (Theodor Roosevelt)');
-			$myTextElement->setFontStyle($fontStyle);
+			$this->renderWord($phpWord, $page, $submissions->toArray());
 
 			$fileName = $schedConf->getLocalizedSetting('acronym') . "-" . $page . ".docx";
 
@@ -1116,6 +1074,98 @@ class DirectorHandler extends TrackDirectorHandler {
 		}
 		else{
 			$p->show("Error: no export page selected.");
+		}
+	}
+
+	function renderWord(&$phpWord, $page = false, $submissionsArray){
+		$schedConf =& Request::getSchedConf();
+		
+		if($page == "reviews"){
+			$reviewRecOptions = array();
+			$reviewFormElementDao =& DAORegistry::getDAO('ReviewFormElementDAO');
+			$reviewFormResponseDao =& DAORegistry::getDAO('ReviewFormResponseDAO');
+			$sessionTypesArray = array();
+			$paperTypeDao = DAORegistry::getDAO('PaperTypeDAO');
+			$sessionTypes = $paperTypeDao->getPaperTypes($schedConf->getId());
+			while ($sessionType = $sessionTypes->next()) {
+				$sessionTypesArray[$sessionType->getId()] = $sessionType;
+			}
+			if(empty($sessionTypesArray))
+				error_log("No session types defined for the scheduled conference");
+			
+			// Title and description
+			$paragraphStyleName = 'text';
+			$phpWord->addParagraphStyle($paragraphStyleName, array('size' => 13, 'spaceAfter' => 100));
+			$phpWord->addTitleStyle(1, array('bold' => true, 'size' => 20), array('spaceAfter' => 240, 'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER));
+			// Adding an empty Section to the document...
+			$section = $phpWord->addSection();
+			// Adding Text element to the Section having font styled by default...
+			$section->addTitle($schedConf->getLocalizedTitle(), 1);
+			$section->addTitle(__('director.review.forms'), 1);
+
+			$section->addLine(
+				array(
+					'width'       => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(12),
+					'height'      => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(0),
+					'positioning' => 'absolute',
+				)
+			);
+			
+			// Celkový počet recenzí a příspěvků (optional)
+
+			$phpWord->addTitleStyle(2, array('bold' => true, 'size' => 18), array('spaceAfter' => 150));
+			$phpWord->addTitleStyle(3, array('bold' => true, 'size' => 16), array('spaceAfter' => 100));
+			$phpWord->addTitleStyle(4, array('bold' => true, 'size' => 14), array('spaceAfter' => 50));
+
+			foreach ($submissionsArray as $submission){
+				$sessionTypeId = $submission->getData('sessionType');
+				$sessionType = $sessionTypesArray[$sessionTypeId];
+				// vypisovat podle sekcí
+				// Vypsat na novou stranu titulek, autory, datum odevzdání a pod to recenze
+				$section->addPageBreak();
+				$section->addTitle($submission->getLocalizedTitle(), 1);
+				$section->addText(__('user.role.authors'). ": " . $submission->getAuthorString(true));
+				$section->addText(__('submissions.track') . ": " . $submission->getTrackTitle());
+				$section->addText(__('paper.sessionType') . ": " . $sessionType->getLocalizedName());
+				$section->addTitle(__('director.reviews'), 2);
+				
+				$noRevAssign = true;
+
+				foreach ($submission->getReviewAssignments() as $reviewAssignments){
+					foreach ($reviewAssignments as $assignment){
+						//if ($assignment->getCancelled() OR $assignment->getDeclined())
+						if ($assignment->getReviewStatus() != REVIEW_STATUS_FINISHED)
+							continue;
+						if (empty($reviewRecOptions))
+							$reviewRecOptions = $assignment->getReviewerRecommendationOptions();
+						
+						// on a valid review assignment set the counter to false
+						$noRevAssign = false;
+
+						$section->addTitle($assignment->getReviewerFullName(), 3);
+						$section->addText(__('director.paper.recommendation') . ": " . __($reviewRecOptions[$assignment->getRecommendation()]));
+						$section->addLine(
+							array(
+								'width'       => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(4),
+								'height'      => \PhpOffice\PhpWord\Shared\Converter::cmToPixel(0),
+								'positioning' => 'absolute',
+							)
+						);
+						$reviewFormElements =& $reviewFormElementDao->getReviewFormElements($assignment->getReviewFormId());
+						$reviewFormResponses =& $reviewFormResponseDao->getReviewReviewFormResponseValues($assignment->getReviewId());
+						foreach ($reviewFormElements as $elementId => $reviewFormElement){
+							// kinda hardcoded; the question consists of first row with question and the second with description
+							$question = explode("<br />", $reviewFormElement->getLocalizedQuestion());
+							$question = strip_tags($question[0]);
+							$section->addTitle($question, 4);
+							$section->addText(strip_tags($reviewFormResponses[$elementId]));
+						}
+					}
+				}
+				if($noRevAssign){
+					$section->addText(__('submissions.noReviews'));
+				}
+			}
 		}
 	}
 

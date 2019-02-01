@@ -206,6 +206,7 @@
 	<message key="submissions.declined">Nepřijaté</message>
 	<message key="submissions.incomplete">Nekompletní</message>
 	<message key="submissions.noSubmissions">Žádné příspěvky</message>
+	<message key="submissions.noReviews">Žádné recenze příspěvku</message>
 	<message key="submissions.queuedEditing">Ve frontě k editování</message>
 	<message key="submissions.queued">Ve frontě</message>
 	<message key="submissions.queuedUnassigned">Čeká na přidělení</message>

@@ -592,7 +592,7 @@ class DirectorHandler extends TrackDirectorHandler {
 		while (true) {
 			$submissions =& $directorSubmissionDao->$functionName(
 				$schedConfId,
-				null,
+				$filterTrack,
 				$directorId,
 				$searchField,
 				$searchMatch,

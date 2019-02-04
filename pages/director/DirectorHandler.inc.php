@@ -22,7 +22,7 @@ use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\Style\Font;
 
 import('trackDirector.TrackDirectorHandler');
-import('submission.reviewAssignment.reviewAssignment');
+import('submission.reviewAssignment.ReviewAssignment');
 
 define('DIRECTOR_TRACK_HOME', 0);
 define('DIRECTOR_TRACK_SUBMISSIONS', 1);
@@ -1120,7 +1120,7 @@ class DirectorHandler extends TrackDirectorHandler {
 			foreach ($submissionsArray as $submission){
 				$sessionTypeId = $submission->getData('sessionType');
 				$sessionType = $sessionTypesArray[$sessionTypeId];
-				// vypisovat podle sekcí
+				// vypisovat podle sekcí (optional)
 				// Vypsat na novou stranu titulek, autory, datum odevzdání a pod to recenze
 				$section->addPageBreak();
 				$section->addTitle($submission->getLocalizedTitle(), 1);
@@ -1158,7 +1158,7 @@ class DirectorHandler extends TrackDirectorHandler {
 							$question = explode("<br />", $reviewFormElement->getLocalizedQuestion());
 							$question = strip_tags($question[0]);
 							$section->addTitle($question, 4);
-							$section->addText(strip_tags($reviewFormResponses[$elementId]));
+							$section->addText(htmlspecialchars(strip_tags($reviewFormResponses[$elementId])));
 						}
 					}
 				}

@@ -117,7 +117,7 @@
   {* EDIT Prettier adding of submissions *}
   {if $acceptingSubmissions}
     <tr>
-      <td colspan="7" class="action" align="center"><strong><a href="{url op="submit"}" class="action always">ahoj{translate key="author.submit"}</a></strong></td>
+      <td colspan="7" class="action" align="center"><strong><a href="{url op="submit"}" class="action always">{translate key="author.submit"}</a></strong></td>
     </tr>
   {else}
     <tr>

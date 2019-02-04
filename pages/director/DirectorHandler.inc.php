@@ -555,6 +555,10 @@ class DirectorHandler extends TrackDirectorHandler {
 
 		$sort = Request::getUserVar('sort');
 		$sortDirection = Request::getUserVar('sortDirection');
+		
+		// default sort by ID
+		if (!$sort)
+			$sort = "id";
 
 		$filterDirector = Request::getUserVar('filterDirector');
 		if ($filterDirector != '' && array_key_exists($filterDirector, $filterDirectorOptions)) {
